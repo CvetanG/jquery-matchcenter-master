@@ -7,27 +7,30 @@
  <script type="text/javascript" src="js/jquery.matchcenter.js"></script>
 <script >
 
-$(document).ready(function(){
-      var Players = new Array();
-      // var Players = [];
-      Players['Nr'] = new Array();
-      Players['Nr']['id']=[1,2,3,4,5,6,7,8,9,10,11,12,13,14];
-      Players['nr']=[22, 9, 11,3,5,7,16,8,6,69,23,2,1,14];
-      Players['name']=['Миро', 'Боби','Денис','Бисер', 'Бобо', 'Сашо', 'Ангел', 'Цецо', 'Боян Тр.', 'Динко', 'Вени', 'Магунски', 'Илия', 'Стоян'];
+      // var Players = new Array();
+      // // var Players = [];
+      // // Players['Nr'] = new Array();
+      // Players['id']=  new Array (1,2,3,4,5,6,7,8,9,10,11,12,13,14);
+      // Players['nr']= new Array (22, 9, 11,3,5,7,16,8,6,69,23,2,1,14);
+      // Players['name']=new Array ('Миро', 'Боби','Денис','Бисер', 'Бобо', 'Сашо', 'Ангел', 'Цецо', 'Боян Тр.', 'Динко', 'Вени', 'Магунски', 'Илия', 'Стоян');
 
+
+// $(document).ready(function(){
 // var i;
-// for (i = 0; i < Players.length; ++i) {
-    // do something with `substr[i]`
-      $.each(Players['Nr'] , function(i) {
-        $("#tog-" + Players['Nr']['id'][i].value).click(function(){
-              if ($("#player-" + Players['Nr']['nr'][i].value).length > 0) {
-                   $("#player-" + Players['Nr']['nr'][i].value).toggle();
-              } else {
-                   $('#matchfield').matchcenter("addPlayer", Players['Nr']['id'][i].value, Players['Nr']['nr'][i].value, Players['Nr']['nr'][i].value, Players['Nr']['name'][i].value, elementLeft, elementTop);
-              }
-        });
-      });
-});
+// for (i = 0; i < 14; ++i) {
+//       // $.each(Players , function(value) {
+//         $("#tog-" + Players.id[i]).click(function(){
+//               if ($("#player-" + Players.nr[i]).length > 0) {
+//                    $("#player-" + Players.nr[i]).toggle();
+//               } else {
+//                    $('#matchfield').matchcenter("addPlayer", Players.id[i], Players.nr[i], Players.nr[i], Players.name[i], elementLeft, elementTop);
+//               }
+//         });
+//      }
+//      // });
+// });
+
+
 
 /*$(document).ready(function(){
 
@@ -42,8 +45,6 @@ $(document).ready(function(){
 </script>
 </head>
 <body>
-<!-- <button>Show</button>
-<p>This is a paragraph.</p> -->
 
 <div id="pagewrap">
 
@@ -67,36 +68,20 @@ $(document).ready(function(){
     </header>
 
     <div id="content">
-    <!--
-   <img src="http://www.bamf-bg.eu/uploads/players/t_1477403936__mg_8858.jpg" onclick="$('#matchfield').matchcenter('substitutePlayer', 101, 22, 22, 'Миро')">
-<img src="http://www.bamf-bg.eu/uploads/players/t_1477403992__mg_8871.jpg" onclick="$('#matchfield').matchcenter('substitutePlayer', 102, 9, 9, 'Боби')">
-<img src="http://www.bamf-bg.eu/uploads/players/t_1477404015__mg_8859.jpg" onclick="$('#matchfield').matchcenter('substitutePlayer', 103, 11, 11, 'Денис')">
-<img src="http://www.bamf-bg.eu/uploads/players/t_1477404041__mg_8852.jpg" onclick="$('#matchfield').matchcenter('substitutePlayer',104, 3, 3, 'Бисер')">
-<img src="http://www.bamf-bg.eu/uploads/players/t_1477464461_^8d0b3988a9ab6236474725f56842bc2388a609e6af24ea52c9^pimgpsh_fullsize_distr.jpg" onclick="$('#matchfield').matchcenter('substitutePlayer', 105, 5, 5, 'Бобо')">
-<img src="http://www.bamf-bg.eu/uploads/players/t_1477404116__mg_8864.jpg" onclick="$('#matchfield').matchcenter('substitutePlayer', 106, 7, 7, 'Сашо')">
-<img src="http://www.bamf-bg.eu/uploads/players/t_1477404147__mg_8855.jpg" onclick="$('#matchfield').matchcenter('substitutePlayer', 107, 16, 16, 'Ангел')">
-<img src="http://www.bamf-bg.eu/uploads/players/t_1477404272__mg_8880.jpg" onclick="$('#matchfield').matchcenter('substitutePlayer',108, 8, 8, 'Цецо')">
-<img src="http://www.bamf-bg.eu/uploads/players/t_1477404163__mg_8876.jpg" onclick="$('#matchfield').matchcenter('substitutePlayer', 109, 6, 6, 'Боян Т')">
-<img src="http://www.bamf-bg.eu/uploads/players/t_1477404358__mg_8877.jpg" onclick="$('#matchfield').matchcenter('substitutePlayer', 110, 69, 69, 'Динко')">
-<img src="http://www.bamf-bg.eu/uploads/players/t_1477404194__mg_8874.jpg" onclick="$('#matchfield').matchcenter('substitutePlayer', 111, 23, 23, 'Вени')">
-<img src="http://www.bamf-bg.eu/uploads/players/t_1477404217__mg_8869.jpg" onclick="$('#matchfield').matchcenter('substitutePlayer', 112, 2, 2, 'Магунски')">
-<img src="http://www.bamf-bg.eu/uploads/players/t_1477404231__mg_8882.jpg" onclick="$('#matchfield').matchcenter('substitutePlayer', 113, 1, 1, 'Илия')">
-<img src="http://www.bamf-bg.eu/uploads/players/t_1477404250__mg_8865.jpg" onclick="$('#matchfield').matchcenter('substitutePlayer', 114, 14, 14, 'Стоян')">
-   -->
-   <img id="tog-1" src="http://www.bamf-bg.eu/uploads/players/t_1477403936__mg_8858.jpg">
-<img id="tog-2" src="http://www.bamf-bg.eu/uploads/players/t_1477403992__mg_8871.jpg">
-<img id="tog-3" src="http://www.bamf-bg.eu/uploads/players/t_1477404015__mg_8859.jpg" >
-<img id="tog-4" src="http://www.bamf-bg.eu/uploads/players/t_1477404041__mg_8852.jpg">
-<img id="tog-5" src="http://www.bamf-bg.eu/uploads/players/t_1477464461_^8d0b3988a9ab6236474725f56842bc2388a609e6af24ea52c9^pimgpsh_fullsize_distr.jpg" >
-<img id="tog-6" src="http://www.bamf-bg.eu/uploads/players/t_1477404116__mg_8864.jpg" >
-<img id="tog-7" src="http://www.bamf-bg.eu/uploads/players/t_1477404147__mg_8855.jpg" >
-<img id="tog-8" src="http://www.bamf-bg.eu/uploads/players/t_1477404272__mg_8880.jpg" >
-<img id="tog-9" src="http://www.bamf-bg.eu/uploads/players/t_1477404163__mg_8876.jpg" >
-<img id="tog-10" src="http://www.bamf-bg.eu/uploads/players/t_1477404358__mg_8877.jpg" >
-<img id="tog-11" src="http://www.bamf-bg.eu/uploads/players/t_1477404194__mg_8874.jpg" >
-<img id="tog-12" src="http://www.bamf-bg.eu/uploads/players/t_1477404217__mg_8869.jpg" >
-<img id="tog-13" src="http://www.bamf-bg.eu/uploads/players/t_1477404231__mg_8882.jpg" >
-<img id="tog-14" src="http://www.bamf-bg.eu/uploads/players/t_1477404250__mg_8865.jpg" >
+   <img src="http://www.bamf-bg.eu/uploads/players/t_1477403936__mg_8858.jpg" onclick="onoffPlayer( 1, 22,  'Миро');">
+<img src="http://www.bamf-bg.eu/uploads/players/t_1477403992__mg_8871.jpg" onclick="onoffPlayer( 2, 9, 'Боби');">
+<img src="http://www.bamf-bg.eu/uploads/players/t_1477404015__mg_8859.jpg" onclick="onoffPlayer( 3,11, 'Денис');">
+<img src="http://www.bamf-bg.eu/uploads/players/t_1477404041__mg_8852.jpg" onclick="onoffPlayer( 4,3, 'Бисер');">
+<img src="http://www.bamf-bg.eu/uploads/players/t_1477464461_^8d0b3988a9ab6236474725f56842bc2388a609e6af24ea52c9^pimgpsh_fullsize_distr.jpg"  onclick="onoffPlayer( 5,  5, 'Бобо');">
+<img src="http://www.bamf-bg.eu/uploads/players/t_1477404116__mg_8864.jpg" onclick="onoffPlayer( 6, 7, 'Сашо');">
+<img src="http://www.bamf-bg.eu/uploads/players/t_1477404147__mg_8855.jpg" onclick="onoffPlayer( 7,  16, 'Ангел');">
+<img  src="http://www.bamf-bg.eu/uploads/players/t_1477404272__mg_8880.jpg"  onclick="onoffPlayer( 8,  8, 'Цецо');">
+<img src="http://www.bamf-bg.eu/uploads/players/t_1477404163__mg_8876.jpg" onclick="onoffPlayer( 9, 6, 'Боян Т');">
+<img src="http://www.bamf-bg.eu/uploads/players/t_1477404358__mg_8877.jpg" onclick="onoffPlayer( 10, 69, 'Динко');">
+<img src="http://www.bamf-bg.eu/uploads/players/t_1477404194__mg_8874.jpg" onclick="onoffPlayer( 11,23, 'Вени');">
+<img src="http://www.bamf-bg.eu/uploads/players/t_1477404217__mg_8869.jpg" onclick="onoffPlayer( 12, 2, 'Магунски');">
+<img src="http://www.bamf-bg.eu/uploads/players/t_1477404231__mg_8882.jpg" onclick="onoffPlayer( 13, 1, 'Илия');">
+<img src="http://www.bamf-bg.eu/uploads/players/t_1477404250__mg_8865.jpg" onclick="onoffPlayer( 14,14, 'Стоян');">
 
 
     </div>
@@ -149,6 +134,13 @@ var elementLeft = rect.left+scrollLeft+325;
 
 <script type="text/javascript">
 
+function onoffPlayer(id, nr, name){
+              if ($("#player-" + nr).length > 0) {
+                   $("#player-" + nr).toggle();
+              } else {
+                   $('#matchfield').matchcenter("addPlayer", id, nr, nr, name, elementLeft, elementTop);
+              }
+};
 
 var matchcenter = $('#matchfield').matchcenter({system: 'Reset'});
 // $('#matchfield').matchcenter("addPlayer", 1, 22, 22, "Miro", elementLeft, elementTop);
@@ -165,6 +157,28 @@ var matchcenter = $('#matchfield').matchcenter({system: 'Reset'});
 // $('#matchfield').matchcenter("addPlayer", 12, 112, 0, "", elementLeft, elementTop);
 // $('#matchfield').matchcenter("addPlayer", 13, 113, 0, "", elementLeft, elementTop);
 // $('#matchfield').matchcenter("addPlayer", 14, 114, 0, "", elementLeft, elementTop);
+
+$(document).ready(function() {
+        $("#player-8").draggable({
+                containment: '#glassbox',
+                scroll: false
+         }).mousemove(function(){
+                var coord = $(this).position();
+                $("p:last").text( "left: " + coord.left + ", top: " + coord.top );
+         }).mouseup(function(){
+                var coords=[];
+                var coord = $(this).position();
+                var item={ coordTop:  coord.left, coordLeft: coord.top  };
+                coords.push(item);
+                var order = { coords: coords };
+                $.post('updatecoords.php', 'data='+$.toJSON(order), function(response){
+                        if(response=="success")
+                            $("#respond").html('<div class="success">X and Y Coordinates Saved!</div>').hide().fadeIn(1000);
+                            setTimeout(function(){ $('#respond').fadeOut(1000); }, 2000);
+                        });
+                });
+
+        });
 </script>
 
 </body>
