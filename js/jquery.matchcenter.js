@@ -32,8 +32,8 @@
 
 //  Playing system: Reset
     systems['Reset'] = new Array();
-    systems['Reset']['x'] = [15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15];
-    systems['Reset']['y'] = [40, 70, 100, 130, 160, 190, 220, 250, 280, 310, 340, 370, 400, 430];
+    systems['Reset']['x'] = [15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 0, 0, 0, 0, 0, 330, 230, 430, 330, 230, 430];
+    systems['Reset']['y'] = [40, 70, 100, 130, 160, 190, 220, 250, 280, 310, 340, 370, 400, 430, 0, 0, 0, 0, 0, 20, 100, 100, 175, 250, 250];
 
     // Playing system: 4-4-1-1
     systems['4-4-1-1'] = new Array();
@@ -73,7 +73,7 @@
                 var settings = {
                     target : $this,
                     players : [],
-                    system : '4-4-2',
+                    system : 'Reset',
                     width : 400,
                     yspacing : 100,
                     xspacing : 10,
@@ -128,7 +128,18 @@
                 var ypos = systems[data.system]['y'][pos-1]  + yadd;
                 var player = '<div id="player-' + id + '" class="player cf" style="left: ' + xpos + 'px; top: ' + ypos + 'px;">';
                 if (nr !=0) {
-                    player += '<div class="player-nr">' + nr + '</div><div class="player-name">' + name + '</div>';
+                    player += '<div class="player-nr">' + nr + '</div><div class="player-name">' + name ;
+                    player += '<div class="dropdown-content">';
+                    player +='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, ' + nr + ', 20, 200, elementLeft, elementTop );">GK</a>';
+                    player +='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, ' + nr + ', 21, 201, elementLeft, elementTop );">LB</a>';
+                    player +='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, ' + nr + ', 22, 202, elementLeft, elementTop );">RB</a>';
+                    player +='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, ' + nr + ', 23, 203, elementLeft, elementTop );">CM</a>';
+                    player +='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, ' + nr + ', 24, 204, elementLeft, elementTop );">LW</a>';
+                    player +='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, ' + nr + ', 25, 205, elementLeft, elementTop );">RW</a>';
+                    player +='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39myDefaultPos&#39, ' + nr + ',' + pos + ',  elementLeft, elementTop );">default</a>';
+                     player +='<a href="#" onclick="$(&#39#player-' + nr + '&#39).remove();">Remove</a>';
+                     player +='</div>';
+                    player +='</div>';
                 } else {
                     player += '<div class="player-nr">' + '' + '</div><div class="player-name">' + name + '</div>';
                 }
@@ -233,16 +244,43 @@
             });
         },
 
+        mySubstitutePlayer : function(inid, pos, outid,xadd,yadd ) {
+            return this.each(function(){
+                var $this = $(this),
+                data = $this.data('matchcenter');
+                var xpos = systems[data.system]['x'][pos-1] + xadd ;
+                var ypos = systems[data.system]['y'][pos-1]  + yadd;
+                $('#player-' + inid).removeAttr('style');
+                $('#player-' + inid).attr({
+                    style: "left: "+ xpos + "; top: " + ypos + "; display: block;"
+                });
+            });
+        },
+
+        myDefaultPos : function(inid, pos, xadd,yadd ) {
+            return this.each(function(){
+                var $this = $(this),
+                data = $this.data('matchcenter');
+                var xpos = systems[data.system]['x'][pos-1] + xadd ;
+                var ypos = systems[data.system]['y'][pos-1]  + yadd;
+                $('#player-' + inid).removeAttr('style');
+                $('#player-' + inid).attr({
+                    style: "left: "+ xpos + "; top: " + ypos + "; display: block;"
+                });
+            });
+        },
+
+
         /**
          * Destroys the plugin instance.
          */
         destroy : function() {
             return this.each(function(){
                 var $this = $(this),
-                data = $this.data('matchcenter');
-                $(window).unbind('.matchcenter');
-                data.matchcenter.remove();
-                $this.removeData('matchcenter');
+                data = $this.data('.matchcenter-field .player');
+                $(window).unbind('.matchcenter-field .player');
+                    data.matchcenter.remove();
+                    $this.removeData('matchcenter');
             })
         },
 
@@ -257,9 +295,5 @@
             $.error('Method ' +  method + ' does not exist on jQuery.matchcenter');
         }
     };
-
-
-
-
 
 })(jQuery);
