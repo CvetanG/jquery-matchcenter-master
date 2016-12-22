@@ -1,4 +1,4 @@
-<html>
+﻿<html>
 
 <head>
     <title>Start Up Line</title>
@@ -89,38 +89,43 @@
         </div>
         <div id="matchfield">
             <?php
-
-     $a = '5';
-     echo '<p>'.$a.'</p>';
+            // $a = 5;
+            // echo "$a";
      include ('config.php');
         //Create a query to fetch our values from the database
-        $get_data = mysqli_query($link, "SELECT * FROM player");
+        $get_player = mysqli_query($link, "SELECT * FROM player");
         //We then set variables from the * array that is fetched from the database
         while($row = mysqli_fetch_array($get_player)) {
 
             $id= $row['pos'];
             $nr = $row['nr'];
             $name = $row['name'];
-            $x = $row['x_pos'];
-            $y = $row['y_pos'];
+            $x = $row['cur_x'];
+            $y = $row['cur_y'];
             $d = $row['display'];
             //then echo our div element with CSS properties to set the left(x) and top(y) values of the element
-             $player = '<div id="player-' . $id . ' " class="player cf" style="left: ' .$x. 'px; top: ' .$y . 'px;">';
-                    $player .= '<div class="player-nr">' .$nr . '</div><div class="player-name">' . $name ;
+             $player = '<div id="player-'.$nr.'" class="player cf" style="left: '.$x. 'px; top: '.$y.'px; display:'.$d.'">';
+                    $player .= '<div class="player-nr">'.$nr.'</div>';
+                    $player .= '<div class="player-name">'.$name;
                     $player .= '<div class="dropdown-content">';
-                    $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, ' .$nr .', 20, 200, elementLeft, elementTop );">GK</a>';
-                    $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, ' .$nr .', 21, 201, elementLeft, elementTop );">LB</a>';
-                    $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, ' .$nr. ', 22, 202, elementLeft, elementTop );">RB</a>';
-                    $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, ' .$nr .', 23, 203, elementLeft, elementTop );">CM</a>';
-                    $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, ' .$nr.', 24, 204, elementLeft, elementTop );">LW</a>';
-                    $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, '.$nr. ', 25, 205, elementLeft, elementTop );">RW</a>';
-                    $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39myDefaultPos&#39, ' .$nr.',' .$id. ',  elementLeft, elementTop );">default</a>';
-                     $player .='<a href="#" onclick="$(&#39#player-' .$nr .'&#39).remove();">Remove</a>';
+                    $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, '.$nr.', 20, 200, elementLeft, elementTop );">GK</a>';
+                    $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, '.$nr.', 21, 201, elementLeft, elementTop );">LB</a>';
+                    $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, '.$nr.', 22, 202, elementLeft, elementTop );">RB</a>';
+                    $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, '.$nr.', 23, 203, elementLeft, elementTop );">CM</a>';
+                    $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, '.$nr.', 24, 204, elementLeft, elementTop );">LW</a>';
+                    $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, '.$nr.', 25, 205, elementLeft, elementTop );">RW</a>';
+                    $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39myDefaultPos&#39, '.$nr.',' .$id. ',  elementLeft, elementTop );">default</a>';
+                     $player .='<a href="#" onclick="$(&#39#player-'.$nr.'&#39).remove();">Remove</a>';
                      $player .='</div>';
                     $player .='</div>';
-            echo '$player';
+                    $player .='</div>';
+            echo "$player";
+
+
+
         }
 ?>
+
         </div>
         <!-- <div id="sidebar">
           <p >
@@ -135,35 +140,35 @@
         </footer>
     </div>
     <script type="text/javascript">
-    var element = document.getElementById('pagewrap'); //replace elementId with your element's Id.
-    var rect = element.getBoundingClientRect();
-    var elementLeft, elementTop; //x and y
-    var scrollTop = document.documentElement.scrollTop ?
-        document.documentElement.scrollTop : document.body.scrollTop;
-    var scrollLeft = document.documentElement.scrollLeft ?
-        document.documentElement.scrollLeft : document.body.scrollLeft;
-    var elementTop = rect.top + scrollTop + 140;
-    var elementLeft = rect.left + scrollLeft + 373;
+        var element = document.getElementById('pagewrap'); //replace elementId with your element's Id.
+        var rect = element.getBoundingClientRect();
+        var elementLeft, elementTop; //x and y
+        var scrollTop = document.documentElement.scrollTop ?
+            document.documentElement.scrollTop : document.body.scrollTop;
+        var scrollLeft = document.documentElement.scrollLeft ?
+            document.documentElement.scrollLeft : document.body.scrollLeft;
+        var elementTop = rect.top + scrollTop + 140;
+        var elementLeft = rect.left + scrollLeft + 373;
 
-    function onoffPlayer(id, nr, name) {
-        if ($("#player-" + nr).length > 0) {
-            $("#player-" + nr).toggle();
-        } else {
-            $('#matchfield').matchcenter("addPlayer", id, nr, nr, name, elementLeft, elementTop);
-        }
-    };
+        function onoffPlayer(id, nr, name) {
+            if ($("#player-" + nr).length > 0) {
+                $("#player-" + nr).toggle();
+            } else {
+                $('#matchfield').matchcenter("addPlayer", id, nr, nr, name, elementLeft, elementTop);
+            }
+        };
 
-    function myReset() {
-        var $this = $(this),
-            data = $this.data('matchcenter');
-        for (var i = 0; i < 100; i++) {
-            $('#player-' + i).remove();
-        }
-    };
+        function myReset() {
+            var $this = $(this),
+                data = $this.data('matchcenter');
+            for (var i = 0; i < 100; i++) {
+                $('#player-' + i).remove();
+            }
+        };
 
-    var matchcenter = $('#matchfield').matchcenter({
-        system: 'Reset'
-    });
+        var matchcenter = $('#matchfield').matchcenter({
+            system: 'Reset'
+        });
 
     // function setPositions(){
     //      $('#matchfield').matchcenter("addPlayer", 20, 200, 0, "GK", elementLeft, elementTop);
@@ -186,27 +191,6 @@
     // $('#matchfield').matchcenter("addPlayer", 13, 113, 0, "", elementLeft, elementTop);
     // $('#matchfield').matchcenter("addPlayer", 14, 114, 0, "", elementLeft, elementTop);
 
-    /*$(document).ready(function() {
-            $("#player-8").draggable({
-                    containment: '#glassbox',
-                    scroll: false
-             }).mousemove(function(){
-                    var coord = $(this).position();
-                    $("p:last").text( "left: " + coord.left + ", top: " + coord.top );
-             }).mouseup(function(){
-                    var coords=[];
-                    var coord = $(this).position();
-                    var item={ coordTop:  coord.left, coordLeft: coord.top  };
-                    coords.push(item);
-                    var order = { coords: coords };
-                    $.post('updatecoords.php', 'data='+$.toJSON(order), function(response){
-                            if(response=="success")
-                                $("#respond").html('<div class="success">X and Y Coordinates Saved!</div>').hide().fadeIn(1000);
-                                setTimeout(function(){ $('#respond').fadeOut(1000); }, 2000);
-                            });
-                    });
-
-            });*/
     </script>
 </body>
 

@@ -127,8 +127,8 @@
                 var xpos = systems[data.system]['x'][pos-1] + xadd ;
                 var ypos = systems[data.system]['y'][pos-1]  + yadd;
                 var player = '<div id="player-' + id + '" class="player cf" style="left: ' + xpos + 'px; top: ' + ypos + 'px;">';
-                if (nr !=0) {
-                    player += '<div class="player-nr">' + nr + '</div><div class="player-name">' + name ;
+                    player += '<div class="player-nr">' + nr + '</div>'
+                    player += '<div class="player-name">' + name ;
                     player += '<div class="dropdown-content">';
                     player +='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, ' + nr + ', 20, 200, elementLeft, elementTop );">GK</a>';
                     player +='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, ' + nr + ', 21, 201, elementLeft, elementTop );">LB</a>';
@@ -140,9 +140,6 @@
                      player +='<a href="#" onclick="$(&#39#player-' + nr + '&#39).remove();">Remove</a>';
                      player +='</div>';
                     player +='</div>';
-                } else {
-                    player += '<div class="player-nr">' + '' + '</div><div class="player-name">' + name + '</div>';
-                }
 
                 player += '</div>';
                 $this.append(player);
@@ -198,6 +195,7 @@
                 });
             });
         },
+
 
         /**
          * Substitute a player.
