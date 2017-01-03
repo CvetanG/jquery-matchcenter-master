@@ -17,12 +17,27 @@
  * this program; if not, write to the Free Software Foundation, Inc., 51
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
+$.getScript("js/ajaxGetPost.js");
 
 (function($) {
 
     /**
      * Holds all supported playing systems.
      */
+    var elementLeft, elementTop;
+    $(document).ready(function(){
+        var element = $("#pagewrap"); //replace elementId with your element's Id.
+        var position = element.offset();
+        var scrollLeft = document.documentElement.scrollLeft ?
+                document.documentElement.scrollLeft : document.body.scrollLeft;
+        var scrollTop = document.documentElement.scrollTop ?
+                document.documentElement.scrollTop : document.body.scrollTop;
+        var left = parseFloat(position.left.toFixed(2));
+        var top = parseFloat(position.top.toFixed(2));
+        elementLeft =  left + scrollLeft + 373;
+        elementTop =  top + scrollTop + 140;
+    });
+
     var systems = new Array();
 
     // Playing system: 4-4-2
@@ -32,6 +47,7 @@
 
 //  Playing system: Reset
     systems['Reset'] = new Array();
+    systems['Reset']['nr'] = [22, 9, 11, 5, 3, 7, 16, 8, 6, 69, 23, 2, 1, 14, 15];
     systems['Reset']['x'] = [15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 0, 0, 0, 0, 0, 330, 230, 430, 330, 230, 430];
     systems['Reset']['y'] = [40, 70, 100, 130, 160, 190, 220, 250, 280, 310, 340, 370, 400, 430, 0, 0, 0, 0, 0, 20, 100, 100, 175, 250, 250];
 
@@ -98,7 +114,7 @@
          *
          * @param string system Playing system (e.g. "4-4-2")
          */
-        setPlayingSystem : function(system, xadd,yadd) {
+        setPlayingSystem : function(system) {
             return this.each(function(){
                 var $this = $(this),
                 data = $this.data('matchcenter');
@@ -106,7 +122,7 @@
                 var xpos = 0;
                 var ypos = 0;
                 $.each(data.players, function(key, value) {
-                    ypos = systems[data.system]['y'][key] + yadd;
+                    ypos = systems[data.system]['y'][key] + elementTop;
                     $('#player-' + value).animate({'left': xpos + 'px', 'top': ypos + 'px'}, "slow");
                 });
             });
@@ -120,12 +136,12 @@
          * @param int nr Shirt number of the player
          * @param string Display name of the player
          */
-        addPlayer : function(pos, id, nr, name, xadd,yadd) {
+        addPlayer : function(pos, id, nr, name) {
             return this.each(function(){
                 var $this = $(this),
                 data = $this.data('matchcenter');
-                var xpos = systems[data.system]['x'][pos-1] + xadd ;
-                var ypos = systems[data.system]['y'][pos-1]  + yadd;
+                var xpos = systems[data.system]['x'][pos-1] + elementLeft ;
+                var ypos = systems[data.system]['y'][pos-1]  + elementTop;
                 var player = '<div id="player-' + id + '" class="player cf" style="left: ' + xpos + 'px; top: ' + ypos + 'px;">';
                     player += '<div class="player-nr">' + nr + '</div>'
                     player += '<div class="player-name">' + name ;
@@ -242,31 +258,71 @@
             });
         },
 
-        mySubstitutePlayer : function(inid, pos, outid,xadd,yadd ) {
+        mySubstitutePlayer : function(inid, pos, str_pos, outid) {
             return this.each(function(){
                 var $this = $(this),
                 data = $this.data('matchcenter');
-                var xpos = systems[data.system]['x'][pos-1] + xadd ;
-                var ypos = systems[data.system]['y'][pos-1]  + yadd;
+                var xpos = systems[data.system]['x'][pos-1] + elementLeft;
+                var ypos = systems[data.system]['y'][pos-1] + elementTop;
                 $('#player-' + inid).removeAttr('style');
                 $('#player-' + inid).attr({
                     style: "left: "+ xpos + "; top: " + ypos + "; display: block;"
                 });
+            updatePos(inid, str_pos);
             });
         },
 
-        myDefaultPos : function(inid, pos, xadd,yadd ) {
+        myDefaultPos : function(nr, id) {
             return this.each(function(){
                 var $this = $(this),
                 data = $this.data('matchcenter');
-                var xpos = systems[data.system]['x'][pos-1] + xadd ;
-                var ypos = systems[data.system]['y'][pos-1]  + yadd;
+                var xpos = systems[data.system]['x'][id-1] + elementLeft ;
+                var ypos = systems[data.system]['y'][id-1] + elementTop;
                 $('#player-' + inid).removeAttr('style');
                 $('#player-' + inid).attr({
                     style: "left: "+ xpos + "; top: " + ypos + "; display: block;"
                 });
+            updateOnePosDefault(nr);
             });
         },
+
+        myReset : function() {
+            return this.each(function(){
+                var $this = $(this),
+                data = $this.data('matchcenter');
+
+                for (var i = 0; i < systems[data.system]['nr'].length; i++) {
+                    var xpos = systems[data.system]['x'][i] + elementLeft;
+                    var ypos = systems[data.system]['y'][i] + elementTop;
+                    var nr = systems[data.system]['nr'][i];
+                    $('#player-' + nr).removeAttr('style');
+                    $('#player-' + nr).attr({
+                            style: "left: "+ xpos + "; top: " + ypos + "; display: none;"
+                    });
+                }
+            resetPositions();
+            });
+        },
+
+        AllDefaultPos : function() {
+            return this.each(function(){
+                var $this = $(this),
+                data = $this.data('matchcenter');
+
+                for (var i = 0; i < systems[data.system]['nr'].length; i++) {
+                    var xpos = systems[data.system]['x'][i] + elementLeft;
+                    var ypos = systems[data.system]['y'][i] + elementTop;
+                    var nr = systems[data.system]['nr'][i];
+                    var disp = $('#player-' + nr).css('display')
+                    $('#player-' + nr).removeAttr('style');
+                    $('#player-' + nr).attr({
+                            style: "left: "+ xpos + "; top: " + ypos + "; display: " + disp + ";"
+                    });
+                }
+            updateAllPosDefault();
+            });
+        },
+
 
 
         /**
@@ -282,6 +338,41 @@
             })
         },
 
+        myDefaultPos : function(nr, id) {
+            return this.each(function(){
+                var $this = $(this),
+                data = $this.data('matchcenter');
+                var xpos = systems[data.system]['x'][id-1] + elementLeft ;
+                var ypos = systems[data.system]['y'][id-1] + elementTop;
+                $('#player-' + inid).removeAttr('style');
+                $('#player-' + inid).attr({
+                    style: "left: "+ xpos + "; top: " + ypos + "; display: block;"
+                });
+            updateOnePosDefault(nr);
+            });
+        },
+
+
+        onoffPlayer : function(id, nr, name) {
+            return this.each(function(){
+                var $this = $(this),
+                data = $this.data('matchcenter');
+                $("#player-" + nr).toggle();
+                updatePlayerBlock(nr);
+                var disp = $('#player-' + nr).css('display');
+                var pos = parseInt($('#player-' + nr).css('left'));
+                if (disp == "none" && pos > 662) {
+                    var xpos = systems[data.system]['x'][id-1] + elementLeft;
+                    var ypos = systems[data.system]['y'][id-1] + elementTop;
+                    $('#player-' + nr).removeAttr('style');
+                    $('#player-' + nr).attr({
+                            style: "left: "+ xpos + "; top: " + ypos + "; display: none;"
+                    });
+                    updateOnePosDefault(nr);
+                }
+            });
+        },
+
     };
 
 	$.fn.matchcenter = function(method) {
@@ -294,4 +385,6 @@
         }
     };
 
+
 })(jQuery);
+
