@@ -10,4 +10,6 @@ $db_pass = "123456"; //db password
 $link = mysqli_connect($db_host, $db_usr, $db_pass) or die("MySQL Error: " . mysqli_error());
 //Select our database
 mysqli_select_db($link, $db_name) or die("MySQL Error: " . mysqli_error());
+
+
 ?>

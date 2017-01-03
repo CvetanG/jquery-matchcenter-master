@@ -1,0 +1,25 @@
+1 - OK - YES
+http://localhost/matchcenter/api/player/pos/22/GK
+
+2 - OK - YES
+http://localhost/matchcenter/api/player/block/9
+http://minervafc.000webhostapp.com/api/player/block/8
+
+3 - OK - YES
+http://localhost/matchcenter/api/player/default/22
+
+4 - OK -
+http://localhost/matchcenter/api/players/default
+
+5 - OK -
+http://localhost/matchcenter/api/players/reset
+
+
+
+
+xadd = elementLeft
+
+yadd = elementTop
+
+$player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, '.$nr.', 25, &#39RW&#39, 205 );">RW</a>';
+$player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39myDefaultPos&#39, '.$nr.',' .$id);">default</a>';

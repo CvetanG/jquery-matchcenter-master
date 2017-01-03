@@ -6,6 +6,7 @@
     <link href="css/matchcenter.css" media="screen,projection" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="js/jquery.matchcenter.js"></script>
+    <script type="text/javascript" src="js/ajaxGetPost.js"></script>
     <script>
     // var Players = new Array();
     // // var Players = [];
@@ -50,50 +51,84 @@
         <header>
             <table>
                 <tr>
-                    <td>
-                        <img src="./img/Minerva-Logo.png" width="270px">
-                    </td>
-                    <td>
-                        <h3>21  Март 2017 (втoрник) </h3>
-                        <h3>18:45h</h3>
-                    </td>
-                    <td>
-                        <img src="./img/logo.png" max height="90px">
-                    </td>
+                <?php
+     include ('./api/config.php');
+        //Create a query to fetch our values from the database
+        $get_match = mysqli_query($link,
+            "SELECT B1.logo_link AS home, B2.logo_link AS away, DATE_FORMAT(A.match_day, \"%D %M %Y %W\") AS match_day, TIME_FORMAT(A.match_time, \"%H:%i\") AS match_time
+            FROM match_day AS A
+            INNER JOIN logoes AS B1
+            ON A.logo_home_id=B1.logo_id
+            INNER JOIN logoes AS B2
+            ON A.logo_away_id=B2.logo_id
+            WHERE A.match_id=1;"
+            );
+        //We then set variables from the * array that is fetched from the database
+        while($row = mysqli_fetch_array($get_match)) {
+
+            // $id= $row['pos'];
+            $home = $row['home'];
+            $away = $row['away'];
+            $match_day = $row['match_day'];
+            $match_time = $row['match_time'];
+
+            $match = '<td> <img src="'.$home.'" width="270px"></td>';
+            $match .= '<td> <h3>'.$match_day.' </h3> <h3>'.$match_time.' </h3></td>';
+            $match .= '<td> <img src="'.$away.'" max height="90px"></td>';
+
+            echo "$match";
+        }
+?>
                 </tr>
             </table>
         </header>
         <br>
         <div id="content">
-            <img src="http://www.bamf-bg.eu/uploads/players/t_1477403936__mg_8858.jpg" onclick="onoffPlayer( 1, 22,  'Миро');">
+            <?php
+     include ('./api/config.php');
+        //Create a query to fetch our values from the database
+        $get_player = mysqli_query($link, "SELECT * FROM players");
+        //We then set variables from the * array that is fetched from the database
+        while($row = mysqli_fetch_array($get_player)) {
+
+            $id= $row['pos'];
+            $nr = $row['nr'];
+            $name = $row['name'];
+            $link = $row['link'];
+            $player = '<img src="'.$link.'" onclick="$(&#39#matchfield&#39).matchcenter(&#39onoffPlayer&#39, '.$id.', '.$nr.', &#39'.$name.'&#39);">';
+
+            echo "$player";
+        }
+?>
+            <!-- <img src="http://www.bamf-bg.eu/uploads/players/t_1477403936__mg_8858.jpg" onclick="onoffPlayer( 1, 22,  'Миро');">
             <img src="http://www.bamf-bg.eu/uploads/players/t_1477403992__mg_8871.jpg" onclick="onoffPlayer( 2, 9, 'Боби');">
-            <img src="http://www.bamf-bg.eu/uploads/players/t_1477404015__mg_8859.jpg" onclick="onoffPlayer( 3,11, 'Денис');">
-            <img src="http://www.bamf-bg.eu/uploads/players/t_1477404041__mg_8852.jpg" onclick="onoffPlayer( 4,3, 'Бисер');">
+            <img src="http://www.bamf-bg.eu/uploads/players/t_1477404015__mg_8859.jpg" onclick="onoffPlayer( 3, 11, 'Денис');">
+            <img src="http://www.bamf-bg.eu/uploads/players/t_1477404041__mg_8852.jpg" onclick="onoffPlayer( 4, 3, 'Бисер');">
             <img src="./img/bobo.jpg" onclick="onoffPlayer( 5,  5, 'Бобо');">
             <img src="http://www.bamf-bg.eu/uploads/players/t_1477404116__mg_8864.jpg" onclick="onoffPlayer( 6, 7, 'Сашо');">
-            <img src="http://www.bamf-bg.eu/uploads/players/t_1477404147__mg_8855.jpg" onclick="onoffPlayer( 7,  16, 'Ангел');">
-            <img src="http://www.bamf-bg.eu/uploads/players/t_1477404272__mg_8880.jpg" onclick="onoffPlayer( 8,  8, 'Цецо');">
+            <img src="http://www.bamf-bg.eu/uploads/players/t_1477404147__mg_8855.jpg" onclick="onoffPlayer( 7, 16, 'Ангел');">
+            <img src="http://www.bamf-bg.eu/uploads/players/t_1477404272__mg_8880.jpg" onclick="onoffPlayer( 8, 8, 'Цецо');">
             <img src="http://www.bamf-bg.eu/uploads/players/t_1477404163__mg_8876.jpg" onclick="onoffPlayer( 9, 6, 'Боян Т');">
             <img src="http://www.bamf-bg.eu/uploads/players/t_1477404358__mg_8877.jpg" onclick="onoffPlayer( 10, 69, 'Динко');">
-            <img src="http://www.bamf-bg.eu/uploads/players/t_1477404194__mg_8874.jpg" onclick="onoffPlayer( 11,23, 'Вени');">
+            <img src="http://www.bamf-bg.eu/uploads/players/t_1477404194__mg_8874.jpg" onclick="onoffPlayer( 11, 23, 'Вени');">
             <img src="http://www.bamf-bg.eu/uploads/players/t_1477404217__mg_8869.jpg" onclick="onoffPlayer( 12, 2, 'Магунски');">
             <img src="http://www.bamf-bg.eu/uploads/players/t_1477404231__mg_8882.jpg" onclick="onoffPlayer( 13, 1, 'Илия');">
-            <img src="http://www.bamf-bg.eu/uploads/players/t_1477404250__mg_8865.jpg" onclick="onoffPlayer( 14,14, 'Стоян');">
+            <img src="http://www.bamf-bg.eu/uploads/players/t_1477404250__mg_8865.jpg" onclick="onoffPlayer( 14, 14, 'Стоян');"> -->
             <p>* click on your picture to Add or Remove yourself from the list with players for the next match</p>
         </div>
         <div id="middle">
             <h2>Who will play next match and Substitution</h2>
             <p id="bottom_possition">
-                <input type="button" onclick="myReset();" value="Remove All Players" />
+                <input type="button" onclick="$('#matchfield').matchcenter('myReset');" value="Reset All Players" />
             </p>
         </div>
         <div id="matchfield">
             <?php
             // $a = 5;
             // echo "$a";
-     include ('config.php');
+     include ('./api/config.php');
         //Create a query to fetch our values from the database
-        $get_player = mysqli_query($link, "SELECT * FROM player");
+        $get_player = mysqli_query($link, "SELECT * FROM players");
         //We then set variables from the * array that is fetched from the database
         while($row = mysqli_fetch_array($get_player)) {
 
@@ -108,30 +143,28 @@
                     $player .= '<div class="player-nr">'.$nr.'</div>';
                     $player .= '<div class="player-name">'.$name;
                     $player .= '<div class="dropdown-content">';
-                    $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, '.$nr.', 20, 200, elementLeft, elementTop );">GK</a>';
-                    $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, '.$nr.', 21, 201, elementLeft, elementTop );">LB</a>';
-                    $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, '.$nr.', 22, 202, elementLeft, elementTop );">RB</a>';
-                    $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, '.$nr.', 23, 203, elementLeft, elementTop );">CM</a>';
-                    $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, '.$nr.', 24, 204, elementLeft, elementTop );">LW</a>';
-                    $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, '.$nr.', 25, 205, elementLeft, elementTop );">RW</a>';
-                    $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39myDefaultPos&#39, '.$nr.',' .$id. ',  elementLeft, elementTop );">default</a>';
-                     $player .='<a href="#" onclick="$(&#39#player-'.$nr.'&#39).remove();">Remove</a>';
+                    $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, '.$nr.', 20, &#39GK&#39, 200 );">GK</a>';
+                    $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, '.$nr.', 21, &#39LB&#39,  201 );">LB</a>';
+                    $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, '.$nr.', 22, &#39RB&#39, 202 );">RB</a>';
+                    $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, '.$nr.', 23, &#39CM&#39, 203 );">CM</a>';
+                    $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, '.$nr.', 24, &#39LW&#39, 204 );">LW</a>';
+                    $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, '.$nr.', 25, &#39RW&#39, 205 );">RW</a>';
+                    $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39myDefaultPos&#39, '.$nr.',' .$id.');">default</a>';
+                     // $player .='<a href="#" onclick="$(&#39#player-'.$nr.'&#39).remove();">Remove</a>';
                      $player .='</div>';
                     $player .='</div>';
                     $player .='</div>';
             echo "$player";
 
-
-
         }
 ?>
 
         </div>
-        <!-- <div id="sidebar">
+        <div id="sidebar">
           <p >
-               <input type="button" onclick="resetPositions();" value="Reset Positions" />
+               <input type="button" onclick="$('#matchfield').matchcenter('AllDefaultPos');" value="Reset All Positions" />
           </p>
-     </div> -->
+     </div>
         <footer>
             <h4>Footer</h4>
             <p>
@@ -140,31 +173,6 @@
         </footer>
     </div>
     <script type="text/javascript">
-        var element = document.getElementById('pagewrap'); //replace elementId with your element's Id.
-        var rect = element.getBoundingClientRect();
-        var elementLeft, elementTop; //x and y
-        var scrollTop = document.documentElement.scrollTop ?
-            document.documentElement.scrollTop : document.body.scrollTop;
-        var scrollLeft = document.documentElement.scrollLeft ?
-            document.documentElement.scrollLeft : document.body.scrollLeft;
-        var elementTop = rect.top + scrollTop + 140;
-        var elementLeft = rect.left + scrollLeft + 373;
-
-        function onoffPlayer(id, nr, name) {
-            if ($("#player-" + nr).length > 0) {
-                $("#player-" + nr).toggle();
-            } else {
-                $('#matchfield').matchcenter("addPlayer", id, nr, nr, name, elementLeft, elementTop);
-            }
-        };
-
-        function myReset() {
-            var $this = $(this),
-                data = $this.data('matchcenter');
-            for (var i = 0; i < 100; i++) {
-                $('#player-' + i).remove();
-            }
-        };
 
         var matchcenter = $('#matchfield').matchcenter({
             system: 'Reset'
