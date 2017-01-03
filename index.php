@@ -3,46 +3,11 @@
 <head>
     <title>Start Up Line</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link href="css/matchcenter.css" media="screen,projection" rel="stylesheet" type="text/css" />
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="js/jquery.matchcenter.js"></script>
-    <script type="text/javascript" src="js/ajaxGetPost.js"></script>
+    <link href="./css/matchcenter.css" media="screen,projection" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="./js/jquery.min.js"></script>
+    <script type="text/javascript" src="./js/jquery.matchcenter.js"></script>
+    <script type="text/javascript" src="./js/ajaxGetPost.js"></script>
     <script>
-    // var Players = new Array();
-    // // var Players = [];
-    // // Players['Nr'] = new Array();
-    // Players['id']=  new Array (1,2,3,4,5,6,7,8,9,10,11,12,13,14);
-    // Players['nr']= new Array (22, 9, 11,3,5,7,16,8,6,69,23,2,1,14);
-    // Players['name']=new Array ('Миро', 'Боби','Денис','Бисер', 'Бобо', 'Сашо', 'Ангел', 'Цецо', 'Боян Тр.', 'Динко', 'Вени', 'Магунски', 'Илия', 'Стоян');
-
-
-    // $(document).ready(function(){
-    // var i;
-    // for (i = 0; i < 14; ++i) {
-    //       // $.each(Players , function(value) {
-    //         $("#tog-" + Players.id[i]).click(function(){
-    //               if ($("#player-" + Players.nr[i]).length > 0) {
-    //                    $("#player-" + Players.nr[i]).toggle();
-    //               } else {
-    //                    $('#matchfield').matchcenter("addPlayer", Players.id[i], Players.nr[i], Players.nr[i], Players.name[i], elementLeft, elementTop);
-    //               }
-    //         });
-    //      }
-    //      // });
-    // });
-
-
-
-    /*$(document).ready(function(){
-
-        $("#tog-1").click(function(){
-              if ($("#player-22").length > 0) {
-                   $("#player-22").toggle();
-              } else {
-                   $('#matchfield').matchcenter("addPlayer", 1, 22, 22, "Miro", elementLeft, elementTop);
-              }
-        });
-    });*/
     </script>
 </head>
 
@@ -100,20 +65,6 @@
             echo "$player";
         }
 ?>
-            <!-- <img src="http://www.bamf-bg.eu/uploads/players/t_1477403936__mg_8858.jpg" onclick="onoffPlayer( 1, 22,  'Миро');">
-            <img src="http://www.bamf-bg.eu/uploads/players/t_1477403992__mg_8871.jpg" onclick="onoffPlayer( 2, 9, 'Боби');">
-            <img src="http://www.bamf-bg.eu/uploads/players/t_1477404015__mg_8859.jpg" onclick="onoffPlayer( 3, 11, 'Денис');">
-            <img src="http://www.bamf-bg.eu/uploads/players/t_1477404041__mg_8852.jpg" onclick="onoffPlayer( 4, 3, 'Бисер');">
-            <img src="./img/bobo.jpg" onclick="onoffPlayer( 5,  5, 'Бобо');">
-            <img src="http://www.bamf-bg.eu/uploads/players/t_1477404116__mg_8864.jpg" onclick="onoffPlayer( 6, 7, 'Сашо');">
-            <img src="http://www.bamf-bg.eu/uploads/players/t_1477404147__mg_8855.jpg" onclick="onoffPlayer( 7, 16, 'Ангел');">
-            <img src="http://www.bamf-bg.eu/uploads/players/t_1477404272__mg_8880.jpg" onclick="onoffPlayer( 8, 8, 'Цецо');">
-            <img src="http://www.bamf-bg.eu/uploads/players/t_1477404163__mg_8876.jpg" onclick="onoffPlayer( 9, 6, 'Боян Т');">
-            <img src="http://www.bamf-bg.eu/uploads/players/t_1477404358__mg_8877.jpg" onclick="onoffPlayer( 10, 69, 'Динко');">
-            <img src="http://www.bamf-bg.eu/uploads/players/t_1477404194__mg_8874.jpg" onclick="onoffPlayer( 11, 23, 'Вени');">
-            <img src="http://www.bamf-bg.eu/uploads/players/t_1477404217__mg_8869.jpg" onclick="onoffPlayer( 12, 2, 'Магунски');">
-            <img src="http://www.bamf-bg.eu/uploads/players/t_1477404231__mg_8882.jpg" onclick="onoffPlayer( 13, 1, 'Илия');">
-            <img src="http://www.bamf-bg.eu/uploads/players/t_1477404250__mg_8865.jpg" onclick="onoffPlayer( 14, 14, 'Стоян');"> -->
             <p>* click on your picture to Add or Remove yourself from the list with players for the next match</p>
         </div>
         <div id="middle">
@@ -166,10 +117,10 @@
           </p>
      </div>
         <footer>
-            <h4>Footer</h4>
+            <!-- <h4>Footer</h4>
             <p>
                 Footer text
-            </p>
+            </p> -->
         </footer>
     </div>
     <script type="text/javascript">
@@ -177,27 +128,6 @@
         var matchcenter = $('#matchfield').matchcenter({
             system: 'Reset'
         });
-
-    // function setPositions(){
-    //      $('#matchfield').matchcenter("addPlayer", 20, 200, 0, "GK", elementLeft, elementTop);
-    //      $('#matchfield').matchcenter("addPlayer", 21, 201, 0, "LB", elementLeft, elementTop);
-    //      $('#matchfield').matchcenter("addPlayer", 22, 202, 0, "RB", elementLeft, elementTop);
-    //      $('#matchfield').matchcenter("addPlayer", 23, 203, 0, "CM", elementLeft, elementTop);
-    //      $('#matchfield').matchcenter("addPlayer", 24, 204, 0, "LW", elementLeft, elementTop);
-    //      $('#matchfield').matchcenter("addPlayer", 25, 205, 0, "RW", elementLeft, elementTop);
-    // };
-
-    // setPositions();
-    // $('#matchfield').matchcenter("addPlayer", 5, 105, 0, "", elementLeft, elementTop);
-    // $('#matchfield').matchcenter("addPlayer", 6, 106, 0, "", elementLeft, elementTop);
-    // $('#matchfield').matchcenter("addPlayer", 7, 107, 0, "", elementLeft, elementTop);
-    // $('#matchfield').matchcenter("addPlayer", 8, 108, 0, "", elementLeft, elementTop);
-    // $('#matchfield').matchcenter("addPlayer", 9, 109,  0, "", elementLeft, elementTop);
-    // $('#matchfield').matchcenter("addPlayer", 10, 110, 0, "", elementLeft, elementTop);
-    // $('#matchfield').matchcenter("addPlayer", 11, 111, 0, "", elementLeft, elementTop);
-    // $('#matchfield').matchcenter("addPlayer", 12, 112, 0, "", elementLeft, elementTop);
-    // $('#matchfield').matchcenter("addPlayer", 13, 113, 0, "", elementLeft, elementTop);
-    // $('#matchfield').matchcenter("addPlayer", 14, 114, 0, "", elementLeft, elementTop);
 
     </script>
 </body>

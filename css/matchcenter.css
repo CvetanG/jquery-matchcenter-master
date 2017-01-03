@@ -153,6 +153,7 @@ header td {
     float: right;
 }
 footer {
+    height: 100px;
     clear: both;
     padding: 0 15px;
 }
