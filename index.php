@@ -3,6 +3,7 @@
 <head>
     <title>Start Up Line</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="./css/reset.css" media="screen,projection" rel="stylesheet" type="text/css" />
     <link href="./css/matchcenter.css" media="screen,projection" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="./js/jquery.min.js"></script>
     <script type="text/javascript" src="./js/jquery.matchcenter.js"></script>
