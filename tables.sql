@@ -24,13 +24,13 @@ DROP TABLE IF EXISTS `logoes`;
 CREATE TABLE `logoes` (
   `logo_id` int(2) NOT NULL AUTO_INCREMENT,
   `company` varchar(50) NOT NULL,
-  `my_link` varchar(100) NOT NULL,
+  `logo_link` varchar(100) NOT NULL,
   PRIMARY KEY (`logo_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 /*Data for the table `logoes` */
 
-insert  into `logoes`(`logo_id`,`company`,`my_link`) values
+insert  into `logoes`(`logo_id`,`company`,`logo_link`) values
 
 (1,'Minerva','./img/Minerva-Logo.png'),
 
