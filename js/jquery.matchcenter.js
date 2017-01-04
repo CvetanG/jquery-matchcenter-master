@@ -35,8 +35,8 @@ $.getScript("./js/jquery.matchcenter.js");
                 document.documentElement.scrollTop : document.body.scrollTop;
         var left = parseFloat(position.left.toFixed(2));
         var top = parseFloat(position.top.toFixed(2));
-        elementLeft =  left + scrollLeft + 373;
-        elementTop =  top + scrollTop + 140;
+        elementLeft = left + scrollLeft + 373;
+        elementTop = top + scrollTop + 140;
     });
 
     var systems = new Array();
