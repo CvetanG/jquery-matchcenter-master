@@ -16,6 +16,7 @@
         <header>
             <table>
                 <tr>
+                    <!-- inserting logoes and Date from DB -->
                 <?php
      include ('./api/config.php');
         //Create a query to fetch our values from the database
@@ -49,6 +50,7 @@
         </header>
         <br>
         <div id="content">
+            <!-- inserting images from DB -->
             <?php
      include ('./api/config.php');
         //Create a query to fetch our values from the database
@@ -74,6 +76,7 @@
             </p>
         </div>
         <div id="matchfield">
+            <!-- inserting drop down menu -->
             <?php
             // $a = 5;
             // echo "$a";

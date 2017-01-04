@@ -4,7 +4,7 @@ require './Slim/Slim.php';
 
 $app = new Slim();
 
-$app->map('/player/pos/:nr/:pos', 'updatePos');
+$app->put('/player/pos/:nr/:pos', 'updatePos');
 $app->put('/player/block/:nr', 'updatePlayerBlock');
 $app->put('/player/default/:nr', 'updateOnePosDefault');
 

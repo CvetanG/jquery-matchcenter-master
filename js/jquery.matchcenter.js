@@ -277,10 +277,10 @@ $.getScript("./js/jquery.matchcenter.js");
             return this.each(function(){
                 var $this = $(this),
                 data = $this.data('matchcenter');
-                var xpos = systems[data.system]['x'][id-1] + elementLeft ;
+                var xpos = systems[data.system]['x'][id-1] + elementLeft;
                 var ypos = systems[data.system]['y'][id-1] + elementTop;
-                $('#player-' + inid).removeAttr('style');
-                $('#player-' + inid).attr({
+                $('#player-' + nr).removeAttr('style');
+                $('#player-' + nr).attr({
                     style: "left: "+ xpos + "; top: " + ypos + "; display: block;"
                 });
             updateOnePosDefault(nr);
@@ -338,21 +338,6 @@ $.getScript("./js/jquery.matchcenter.js");
                     $this.removeData('matchcenter');
             })
         },
-
-        myDefaultPos : function(nr, id) {
-            return this.each(function(){
-                var $this = $(this),
-                data = $this.data('matchcenter');
-                var xpos = systems[data.system]['x'][id-1] + elementLeft ;
-                var ypos = systems[data.system]['y'][id-1] + elementTop;
-                $('#player-' + inid).removeAttr('style');
-                $('#player-' + inid).attr({
-                    style: "left: "+ xpos + "; top: " + ypos + "; display: block;"
-                });
-            updateOnePosDefault(nr);
-            });
-        },
-
 
         onoffPlayer : function(id, nr, name) {
             return this.each(function(){
