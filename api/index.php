@@ -1,5 +1,5 @@
 <?php
-require 'Slim/Slim.php';
+require './Slim/Slim.php';
 // \Slim\Slim::registerAutoloader();
 
 $app = new Slim();
@@ -256,7 +256,7 @@ function get_players() {
 }
 
 function getConnection() {
-	require 'config.php';
+	require './config.php';
 	$dbConnection = new PDO("mysql:host=$db_host;dbname=$db_name", $db_usr, $db_pass);
 	$dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
  	return $dbConnection;
