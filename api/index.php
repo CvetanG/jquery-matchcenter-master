@@ -13,6 +13,7 @@ $app->put('/players/reset', 'resetPositions');
 
 $app->run();
 
+
 // change def position to the constant player
 function updatePos($nr, $pos) {
 
@@ -25,7 +26,7 @@ function updatePos($nr, $pos) {
     		$stmt = $db->prepare($sql);
 
      	$get_x_pos = get_coordPos('x', $pos);
-     	$get_y_pos = get_coordPos('y', $pos);
+        $get_y_pos = get_coordPos('y', $pos);
 
      	$stmt->bindParam("cur_x", $get_x_pos);
      	$stmt->bindParam("cur_y", $get_y_pos);
@@ -177,7 +178,7 @@ function get_coordPos($coord, $pos) {
 
 	try {
      	$db = getConnection();
-    		$stmt = $db->prepare($sql);
+    	$stmt = $db->prepare($sql);
      	$stmt->bindParam("pos", $pos);
      	$stmt->execute();
      	$pos = $stmt->fetchColumn(0);
@@ -205,7 +206,7 @@ function get_DefCoord($coord, $nr) {
 
 	try {
      	$db = getConnection();
-    		$stmt = $db->prepare($sql);
+    	$stmt = $db->prepare($sql);
      	$stmt->bindParam("nr", $nr);
      	$stmt->execute();
      	$pos = $stmt->fetchColumn(0);
