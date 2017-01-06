@@ -109,17 +109,12 @@ CREATE TABLE `positions` (
 
 insert  into `positions`(`pos`,`def_x`,`def_y`) values
 
-('GK',976.80,180.00),
-
-('LB',876.80,260.00),
-
-('LW',1076.80,260.00),
-
-('MC',976.80,335.00),
-
-('RB',876.80,410.00),
-
-('RW',1076.80,410.00);
+('GK',330.00,20.00),
+('LB',230.00,100.00),
+('LW',430.00,100.00),
+('MC',330.00,175.00),
+('RB',230.00,250.00),
+('RW',430.00,250.00);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
