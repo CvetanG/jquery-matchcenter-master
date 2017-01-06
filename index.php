@@ -90,13 +90,13 @@
             $id= $row['pos'];
             $nr = $row['nr'];
             $name = $row['name'];
-            // check OS
-            if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-                $x = ((float)$row['cur_x']);
-            } else {
-                $x = ((float)$row['cur_x']) + 200.20;
-            }
-            $y = $row['cur_y'];
+
+            $elementLeft = $_COOKIE["elementLeft"];
+            $elementTop = $_COOKIE["elementTop"];
+            
+            $x = (float)$row['cur_x'] + $elementLeft;
+            
+            $y = (float)$row['cur_y'] + $elementTop;
             $d = $row['display'];
             //then echo our div element with CSS properties to set the left(x) and top(y) values of the element
              $player = '<div id="player-'.$nr.'" class="player cf" style="left: '.$x. 'px; top: '.$y.'px; display:'.$d.'">';

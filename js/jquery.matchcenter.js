@@ -39,6 +39,24 @@ $.getScript("./js/jquery.matchcenter.js");
         elementTop = top + scrollTop + 140;
     });
 
+    
+        $(document).ready(function () {
+            createCookie("elementLeft", elementLeft, "10");
+            createCookie("elementTop", elementTop, "10");
+        });
+
+        function createCookie(name, value, days) {
+        var expires;
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            expires = "; expires=" + date.toGMTString();
+        } else {
+            expires = "";
+        }
+         document.cookie = escape(name) + "=" + escape(value) + expires + "; path=/";
+        }
+
     var systems = new Array();
 
     // Playing system: 4-4-2
