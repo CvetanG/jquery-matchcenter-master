@@ -3,7 +3,7 @@
 <head>
     <title>Start Up Line</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link href="./css/reset.css" media="screen,projection" rel="stylesheet" type="text/css" />
+    <!-- <link href="./css/reset.css" media="screen,projection" rel="stylesheet" type="text/css" /> -->
     <link href="./css/matchcenter.css" media="screen,projection" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="./js/jquery.min.js"></script>
     <script type="text/javascript" src="./js/jquery.matchcenter.js"></script>
@@ -90,7 +90,12 @@
             $id= $row['pos'];
             $nr = $row['nr'];
             $name = $row['name'];
-            $x = $row['cur_x'];
+            // check OS
+            if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+                $x = ((float)$row['cur_x']);
+            } else {
+                $x = ((float)$row['cur_x']) + 200.20;
+            }
             $y = $row['cur_y'];
             $d = $row['display'];
             //then echo our div element with CSS properties to set the left(x) and top(y) values of the element
