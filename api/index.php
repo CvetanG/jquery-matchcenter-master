@@ -173,42 +173,65 @@ function resetPositions() {
 }
 
 function get_coordPos($coord, $pos) {
-	require './config.php';
 		if ($coord === 'x') {
 			$def_pos = 'def_x';
 		} else if ($coord === 'y') {
 			$def_pos = 'def_y';
 		}
 
-     $sql = "SELECT '".$def_pos."' FROM positions where pos='".$pos."' LIMIT 1";
-     $get_pos = mysqli_query($link, $sql);
+     $sql = "SELECT ".$def_pos." FROM positions where pos=:pos";
 
-     $result = mysqli_fetch_field($get_pos);
-
-
-	mysqli_close($link);
-
- //     $result = mysqli_query($link,$sql);
- //     $x_y = mysqli_fetch_array($result)
-	// $close;
-	echo $result;
-     return $result;
-
-
-	// try {
- //     	$db = getConnection();
- //    		$stmt = $db->prepare($sql);
- //     	$stmt->bindParam("pos", $pos);
- //     	$stmt->execute();
- //     	$pos = $stmt->fetchColumn(0);
-	//      $db = null;
-	//      // echo $pos;
- //     	return $pos;
- //   	} catch(PDOException $e) {
-	//     //error_log($e->getMessage(), 3, '/var/tmp/php.log');
-	// 	echo '{"error":{"text":'. $e->getMessage() .'}}';
-	// }
+	try {
+     	$db = getConnection();
+    		$stmt = $db->prepare($sql);
+     	$stmt->bindParam("pos", $pos);
+     	$stmt->execute();
+     	$pos = $stmt->fetchColumn(0);
+	     $db = null;
+	     echo $pos;
+     	return $pos;
+   	} catch(PDOException $e) {
+	    //error_log($e->getMessage(), 3, '/var/tmp/php.log');
+		echo '{"error":{"text":'. $e->getMessage() .'}}';
+	}
 }
+// function get_coordPos($coord, $pos) {
+// 	require './config.php';
+// 		if ($coord === 'x') {
+// 			$def_pos = 'def_x';
+// 		} else if ($coord === 'y') {
+// 			$def_pos = 'def_y';
+// 		}
+
+//      $sql = "SELECT '".$def_pos."' FROM positions where pos='".$pos."' LIMIT 1";
+//      $get_pos = mysqli_query($link, $sql);
+
+//      $result = mysqli_fetch_field($get_pos);
+
+
+// 	mysqli_close($link);
+
+//  //     $result = mysqli_query($link,$sql);
+//  //     $x_y = mysqli_fetch_array($result)
+// 	// $close;
+// 	echo $result;
+//      return $result;
+
+
+// 	// try {
+//  //     	$db = getConnection();
+//  //    		$stmt = $db->prepare($sql);
+//  //     	$stmt->bindParam("pos", $pos);
+//  //     	$stmt->execute();
+//  //     	$pos = $stmt->fetchColumn(0);
+// 	//      $db = null;
+// 	//      // echo $pos;
+//  //     	return $pos;
+//  //   	} catch(PDOException $e) {
+// 	//     //error_log($e->getMessage(), 3, '/var/tmp/php.log');
+// 	// 	echo '{"error":{"text":'. $e->getMessage() .'}}';
+// 	// }
+// }
 
 function get_DefCoord($coord, $nr) {
 	$request = Slim::getInstance()->request();
