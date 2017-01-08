@@ -180,33 +180,18 @@ function get_coordPos($coord, $pos) {
 			$def_pos = 'def_y';
 		}
 
-     $query = "SELECT '".$def_pos."' FROM positions where pos='".$pos."'";
+     $sql = "SELECT '".$def_pos."' FROM positions where pos='".$pos."' LIMIT 1";
+     $get_pos = mysqli_query($link, $sql);
 
-     if ($stmt = mysqli_prepare($link, $query)) {
+     $result = mysqli_fetch_field($get_pos);
 
-	    /* execute statement */
-	    mysqli_stmt_execute($stmt);
 
-	    /* bind result variables */
-	    mysqli_stmt_bind_result($stmt, $x_y);
-
-	    /* fetch values */
-	    // while (mysqli_stmt_fetch($stmt)) {
-	    //     printf ("%s (%s)\n", $name, $code);
-    	// 	}
-
-	    $result = mysqli_stmt_fetch($stmt)
-
-	    /* close statement */
-	    mysqli_stmt_close($stmt);
-	}
-
-	/* close connection */
 	mysqli_close($link);
 
  //     $result = mysqli_query($link,$sql);
  //     $x_y = mysqli_fetch_array($result)
 	// $close;
+	echo $result;
      return $result;
 
 

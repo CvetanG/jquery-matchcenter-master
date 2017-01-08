@@ -18,13 +18,10 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 $.getScript("./js/ajaxGetPost.js");
-$.getScript("./js/jquery.matchcenter.js");
+// $.getScript("./js/jquery.min.js");
 
 (function($) {
 
-    /**
-     * Holds all supported playing systems.
-     */
     var elementLeft, elementTop;
     $(document).ready(function(){
         var element = $("#pagewrap"); //replace elementId with your element's Id.
@@ -37,15 +34,11 @@ $.getScript("./js/jquery.matchcenter.js");
         var top = parseFloat(position.top.toFixed(2));
         elementLeft = left + scrollLeft + 373;
         elementTop = top + scrollTop + 140;
+        createCookie("elementLeft", elementLeft, "10");
+        createCookie("elementTop", elementTop, "10");
     });
 
-
-        $(document).ready(function () {
-            createCookie("elementLeft", elementLeft, "10");
-            createCookie("elementTop", elementTop, "10");
-        });
-
-        function createCookie(name, value, days) {
+    function createCookie(name, value, days) {
         var expires;
         if (days) {
             var date = new Date();
@@ -54,9 +47,12 @@ $.getScript("./js/jquery.matchcenter.js");
         } else {
             expires = "";
         }
-         document.cookie = escape(name) + "=" + escape(value) + expires + "; path=/";
-        }
+        document.cookie = escape(name) + "=" + escape(value) + expires + "; path=/";
+    }
 
+    /**
+     * Holds all supported playing systems.
+     */
     var systems = new Array();
 
     // Playing system: 4-4-2

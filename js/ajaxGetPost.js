@@ -23,7 +23,7 @@ function updatePos(nr, pos) {
             // code for IE6, IE5
             xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
         };
-    xmlhttp.open("PUT","./api/serv_updatePos.php?nr="+nr+";&pos="+pos, true);
+    xmlhttp.open("PUT","./api/serv_updatePos.php?nr="+nr+"&pos="+pos, true);
     xmlhttp.send();
 
     if (xmlhttp.status === 200) {
