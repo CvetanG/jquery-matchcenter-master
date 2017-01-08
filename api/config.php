@@ -20,5 +20,4 @@ if (!$link) {
 }
 
 // echo "Connected successfully";
-
 ?>

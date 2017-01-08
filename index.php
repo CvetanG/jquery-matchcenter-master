@@ -93,9 +93,9 @@
 
             $elementLeft = $_COOKIE["elementLeft"];
             $elementTop = $_COOKIE["elementTop"];
-            
+
             $x = (float)$row['cur_x'] + $elementLeft;
-            
+
             $y = (float)$row['cur_y'] + $elementTop;
             $d = $row['display'];
             //then echo our div element with CSS properties to set the left(x) and top(y) values of the element
@@ -104,12 +104,12 @@
                     $player .= '<div class="player-name">'.$name;
                     $player .= '<div class="dropdown-content">';
                     $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, '.$nr.', 20, &#39GK&#39, 200 );">GK</a>';
-                    $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, '.$nr.', 21, &#39LB&#39,  201 );">LB</a>';
+                    $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, '.$nr.', 21, &#39LB&#39, 201 );">LB</a>';
                     $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, '.$nr.', 22, &#39RB&#39, 202 );">RB</a>';
                     $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, '.$nr.', 23, &#39CM&#39, 203 );">CM</a>';
                     $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, '.$nr.', 24, &#39LW&#39, 204 );">LW</a>';
                     $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, '.$nr.', 25, &#39RW&#39, 205 );">RW</a>';
-                    $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39myDefaultPos&#39, '.$nr.',' .$id.');">default</a>';
+                    $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39myDefaultPos&#39, '.$nr.', '.$id.');">default</a>';
                      // $player .='<a href="#" onclick="$(&#39#player-'.$nr.'&#39).remove();">Remove</a>';
                      $player .='</div>';
                     $player .='</div>';

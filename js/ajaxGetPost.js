@@ -1,21 +1,34 @@
-var rootURL = "http://localhost/matchcenter/api/";
+// function createXmlhttp() {
+//         if (window.XMLHttpRequest) {
+//             // code for IE7+, Firefox, Chrome, Opera, Safari
+//             xmlhttp = new XMLHttpRequest();
+//         } else {
+//             // code for IE6, IE5
+//             xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+//         };
+//       return xmlhttp;
+// }
+
+
+// xmlhttp.open("GET","getuser.php?q="+str,true);
+//         xmlhttp.send();
 
 //$app->put('player/pos/:nr/:pos', 'updatePos');
 function updatePos(nr, pos) {
-    $.ajax({
-        type: 'PUT',
-        contentType: 'application/json',
-        // url: rootURL + 'player/pos/' + $('#playerNr').val() + '/' + $('#pos').val(),
-        url: rootURL + 'player/pos/' + nr + '/' + pos,
-        dataType: "json",
-        data: formToJSON(),
-        success: function(data, textStatus, jqXHR){
-            alert('Player position updated successfully');
-        },
-        error: function(jqXHR, textStatus, errorThrown){
-            alert('updatePos error: ' + textStatus);
-        }
-    });
+    // xmlhttp = createXmlhttp;
+    if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        };
+    xmlhttp.open("PUT","./api/serv_updatePos.php?nr="+nr+";&pos="+pos, true);
+    xmlhttp.send();
+
+    if (xmlhttp.status === 200) {
+      alert(xmlhttp.responseText);
+    }
 }
 
 // $app->put('player/block/:nr', 'updatePlayerBlock');

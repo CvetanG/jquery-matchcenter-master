@@ -39,7 +39,7 @@ $.getScript("./js/jquery.matchcenter.js");
         elementTop = top + scrollTop + 140;
     });
 
-    
+
         $(document).ready(function () {
             createCookie("elementLeft", elementLeft, "10");
             createCookie("elementTop", elementTop, "10");
@@ -66,7 +66,7 @@ $.getScript("./js/jquery.matchcenter.js");
 
 //  Playing system: Reset
     systems['Reset'] = new Array();
-    systems['Reset']['nr'] = [22, 9, 11, 5, 3, 7, 16, 8, 6, 69, 23, 2, 1, 14, 15];
+    systems['Reset']['nr'] = [22, 9, 11, 3, 5, 7, 16, 8, 6, 69, 23, 2, 1, 14, 15];
     systems['Reset']['x'] = [15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 0, 0, 0, 0, 0, 330, 230, 430, 330, 230, 430];
     systems['Reset']['y'] = [40, 70, 100, 130, 160, 190, 220, 250, 280, 310, 340, 370, 400, 430, 0, 0, 0, 0, 0, 20, 100, 100, 175, 250, 250];
 

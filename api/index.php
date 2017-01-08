@@ -1,43 +1,52 @@
 <?php
-require './Slim/Slim.php';
-// \Slim\Slim::registerAutoloader();
-
-$app = new Slim();
-
-$app->put('/player/pos/:nr/:pos', 'updatePos');
-$app->put('/player/block/:nr', 'updatePlayerBlock');
-$app->put('/player/default/:nr', 'updateOnePosDefault');
-
-$app->put('/players/default', 'setAllPosDefault');
-$app->put('/players/reset', 'resetPositions');
-
-$app->run();
-
 
 // change def position to the constant player
 function updatePos($nr, $pos) {
 
-	$request = Slim::getInstance()->request();
-	$body = $request->getBody();
-	$player = json_decode($body);
-	$sql = "UPDATE players SET cur_x=:cur_x, cur_y=:cur_y WHERE nr=:nr";
-	try {
-     	$db = getConnection();
-    		$stmt = $db->prepare($sql);
+	// $nr = intval($_GET['nr']);
+	// $pos = intval($_GET['pos']);
 
-     	$get_x_pos = get_coordPos('x', $pos);
-        $get_y_pos = get_coordPos('y', $pos);
+	include ('./api/config.php');
 
-     	$stmt->bindParam("cur_x", $get_x_pos);
-     	$stmt->bindParam("cur_y", $get_y_pos);
-     	$stmt->bindParam("nr", $nr);
-     	$stmt->execute();
-     	$db = null;
-      	echo json_encode($player);
-   } catch(PDOException $e) {
-	    //error_log($e->getMessage(), 3, '/var/tmp/php.log');
-		echo '{"error":{"text":'. $e->getMessage() .'}}';
-	}
+// $con = mysqli_connect('localhost','peter','abc123','my_db');
+// if (!$con) {
+//     die('Could not connect: ' . mysqli_error($con));
+// }
+
+
+// mysqli_select_db($con,"ajax_demo");
+	$cur_x = get_coordPos('x', $pos);
+     $cur_y = get_coordPos('y', $pos);
+
+	// $sql="SELECT * FROM user WHERE id = '".$q."'";
+	$sql = "UPDATE players SET cur_x= '".$cur_x."', cur_y= '".$cur_y."' WHERE nr='".$nr."'";
+	mysqli_query($link,$sql);
+	mysqli_close($link);
+
+
+
+
+	// $request = Slim::getInstance()->request();
+	// $body = $request->getBody();
+	// $player = json_decode($body);
+	// $sql = "UPDATE players SET cur_x=:cur_x, cur_y=:cur_y WHERE nr=:nr";
+	// try {
+ //     	$db = getConnection();
+ //    		$stmt = $db->prepare($sql);
+
+ //     	$get_x_pos = get_coordPos('x', $pos);
+ //        	$get_y_pos = get_coordPos('y', $pos);
+
+ //     	$stmt->bindParam("cur_x", $get_x_pos);
+ //     	$stmt->bindParam("cur_y", $get_y_pos);
+ //     	$stmt->bindParam("nr", $nr);
+ //     	$stmt->execute();
+ //     	$db = null;
+ //      	echo json_encode($player);
+ //   } catch(PDOException $e) {
+	//     //error_log($e->getMessage(), 3, '/var/tmp/php.log');
+	// 	echo '{"error":{"text":'. $e->getMessage() .'}}';
+	// }
 }
 
 
@@ -164,31 +173,56 @@ function resetPositions() {
 }
 
 function get_coordPos($coord, $pos) {
-	$request = Slim::getInstance()->request();
-	$body = $request->getBody();
-	$player = json_decode($body);
-
+	require './config.php';
 		if ($coord === 'x') {
 			$def_pos = 'def_x';
 		} else if ($coord === 'y') {
 			$def_pos = 'def_y';
 		}
 
-     $sql = "SELECT ".$def_pos." FROM positions where pos=:pos";
+     $query = "SELECT '".$def_pos."' FROM positions where pos='".$pos."'";
 
-	try {
-     	$db = getConnection();
-    	$stmt = $db->prepare($sql);
-     	$stmt->bindParam("pos", $pos);
-     	$stmt->execute();
-     	$pos = $stmt->fetchColumn(0);
-	     $db = null;
-	     // echo $pos;
-     	return $pos;
-   	} catch(PDOException $e) {
-	    //error_log($e->getMessage(), 3, '/var/tmp/php.log');
-		echo '{"error":{"text":'. $e->getMessage() .'}}';
+     if ($stmt = mysqli_prepare($link, $query)) {
+
+	    /* execute statement */
+	    mysqli_stmt_execute($stmt);
+
+	    /* bind result variables */
+	    mysqli_stmt_bind_result($stmt, $x_y);
+
+	    /* fetch values */
+	    // while (mysqli_stmt_fetch($stmt)) {
+	    //     printf ("%s (%s)\n", $name, $code);
+    	// 	}
+
+	    $result = mysqli_stmt_fetch($stmt)
+
+	    /* close statement */
+	    mysqli_stmt_close($stmt);
 	}
+
+	/* close connection */
+	mysqli_close($link);
+
+ //     $result = mysqli_query($link,$sql);
+ //     $x_y = mysqli_fetch_array($result)
+	// $close;
+     return $result;
+
+
+	// try {
+ //     	$db = getConnection();
+ //    		$stmt = $db->prepare($sql);
+ //     	$stmt->bindParam("pos", $pos);
+ //     	$stmt->execute();
+ //     	$pos = $stmt->fetchColumn(0);
+	//      $db = null;
+	//      // echo $pos;
+ //     	return $pos;
+ //   	} catch(PDOException $e) {
+	//     //error_log($e->getMessage(), 3, '/var/tmp/php.log');
+	// 	echo '{"error":{"text":'. $e->getMessage() .'}}';
+	// }
 }
 
 function get_DefCoord($coord, $nr) {
