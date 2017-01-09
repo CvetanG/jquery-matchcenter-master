@@ -99,22 +99,24 @@ insert  into `players`(`pos`,`nr`,`name`,`link`,`def_x`,`def_y`,`cur_x`,`cur_y`,
 DROP TABLE IF EXISTS `positions`;
 
 CREATE TABLE `positions` (
+  `id` int(2) NOT NULL AUTO_INCREMENT,
   `pos` varchar(2) NOT NULL,
   `def_x` decimal(6,2) NOT NULL,
   `def_y` decimal(6,2) NOT NULL,
-  PRIMARY KEY (`pos`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `pos_UNIQUE` (`pos`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 /*Data for the table `positions` */
 
-insert  into `positions`(`pos`,`def_x`,`def_y`) values
+insert  into `positions`(`id`,`pos`,`def_x`,`def_y`) values
 
-('GK',330.00,20.00),
-('LB',230.00,100.00),
-('LW',430.00,100.00),
-('MC',330.00,175.00),
-('RB',230.00,250.00),
-('RW',430.00,250.00);
+(1,'GK',330.00,20.00),
+(2,'LB',230.00,100.00),
+(3,'RB',430.00,100.00),
+(4,'MC',330.00,175.00),
+(5,'LW',230.00,250.00),
+(6,'RW',430.00,250.00);
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
