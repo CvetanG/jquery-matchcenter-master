@@ -63,8 +63,8 @@
             $nr = $row['nr'];
             $name = $row['name'];
             $link = $row['link'];
-            $player = '<img src="'.$link.'" onclick="$(&#39#matchfield&#39).matchcenter(&#39onoffPlayer&#39, '.$id.', '.$nr.', &#39'.$name.'&#39);">';
-
+            $player = '<img id="imgA1" class="img-'.$nr.'" src="'.$link.'" onclick="$(&#39#matchfield&#39).matchcenter(&#39onoffPlayer&#39, '.$id.', '.$nr.', &#39'.$name.'&#39);">';
+            $player .= '<img id="imgB1" src="img/redcross.png">';
             echo "$player";
         }
 ?>
@@ -110,6 +110,7 @@
                     $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, '.$nr.', 24, &#39LW&#39, 204 );">LW</a>';
                     $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, '.$nr.', 25, &#39RW&#39, 205 );">RW</a>';
                     $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39myDefaultPos&#39, '.$nr.', '.$id.');">default</a>';
+                    $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39addRedCard&#39, '.$nr.');">redcard</a>';
                      // $player .='<a href="#" onclick="$(&#39#player-'.$nr.'&#39).remove();">Remove</a>';
                      $player .='</div>';
                     $player .='</div>';

@@ -87,7 +87,8 @@ body {
     background: linear-gradient(top, #fdf875, #e8eb00);
 } */
 
-/* .matchcenter-field .player-redcard {
+ /*.matchcenter-field .player-redcard {*/
+.player-redcard {
     width: 8px;
     height: 12px;
     border: 1px solid #a50000;
@@ -101,8 +102,7 @@ body {
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fd7575', endColorstr='#eb0000');
     -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#fd7575', endColorstr='#eb0000')";
     background: linear-gradient(top, #fd7575, #eb0000);
-} */
-
+} 
 
 /* STRUCTURE */
 
@@ -129,6 +129,7 @@ header td {
     width: 290px;
     float: left;
     padding: 5px 15px;
+    position:relative;
 }
 
 #middle {
@@ -244,18 +245,33 @@ MEDIA QUERIES
     border: solid 1px #ccc;
 }
 
-#content img {
-    overflow: hidden;
+#content #imgA1 {
+    /*overflow: hidden;*/
+    position: relative;
     display: inline-block;
     max-width: 24%;
     /*margin: auto;*/
     border-radius:15px;
     border: solid 3px #fff;
-    overflow:hidden;
-     margin: 10px;
+    margin: 10px;
+    z-index: 1;
 }
 
-#content img:hover {
+#imgB1 {
+    max-width: 20%;
+    position:relative;
+    top: 5px;
+    left: -45px;
+    z-index: 3;
+    /*border: none;*/
+    /*display: none;*/
+    display: inline;
+    /*overflow: hidden;*/
+    margin:0;
+    padding:0;
+} 
+
+#content #imgA1:hover {
     transform: scale(1.15);
     cursor: pointer;
 }
@@ -286,7 +302,7 @@ MEDIA QUERIES
 }
 
 .dropdown-content a {
-     color: white;
+    color: white;
     padding: 4px 20px;
     text-decoration: none;
     display: block;
