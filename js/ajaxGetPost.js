@@ -1,29 +1,17 @@
-// function createXmlhttp() {
-//         if (window.XMLHttpRequest) {
-//             // code for IE7+, Firefox, Chrome, Opera, Safari
-//             xmlhttp = new XMLHttpRequest();
-//         } else {
-//             // code for IE6, IE5
-//             xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-//         };
-//       return xmlhttp;
-// }
-
-
-// xmlhttp.open("GET","getuser.php?q="+str,true);
-//         xmlhttp.send();
-
-//$app->put('player/pos/:nr/:pos', 'updatePos');
-function updatePos(nr, pos) {
-    // xmlhttp = createXmlhttp;
-    if (window.XMLHttpRequest) {
+var xmlhttp;
+$(document).ready(function(){
+        if (window.XMLHttpRequest) {
             // code for IE7+, Firefox, Chrome, Opera, Safari
             xmlhttp = new XMLHttpRequest();
         } else {
             // code for IE6, IE5
             xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
         };
-    xmlhttp.open("GET","./api/serv_updatePos.php?nr="+nr+"&pos="+pos, true);
+    });
+
+function updatePos(nr, pos) {
+    
+    xmlhttp.open("GET","api/serv_updatePos.php?nr="+nr+"&pos="+pos, true);
     xmlhttp.send();
 
     if (xmlhttp.status === 200) {
@@ -99,18 +87,4 @@ function resetPositions() {
             alert('resetPositions error: ' + textStatus);
         }
     });
-}
-
-function formToJSON() {
-    return JSON.stringify({
-        "pos": $('#pos').val(),
-        "nr": $('#nr').val(),
-        "name": $('#name').val(),
-        "link": $('#link').val(),
-        "def_x": $('#def_x').val(),
-        "def_y": $('#def_y').val(),
-        "cur_x": $('#cur_x').val(),
-        "cur_y": $('#cur_yn').val(),
-        "display": $('#display').val()
-        });
 }

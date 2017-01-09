@@ -6,7 +6,7 @@ function updatePos($nr, $pos) {
 	// $nr = intval($_GET['nr']);
 	// $pos = intval($_GET['pos']);
 
-	include ('./api/config.php');
+	include ('./config.php');
 
 // $con = mysqli_connect('localhost','peter','abc123','my_db');
 // if (!$con) {
@@ -20,7 +20,7 @@ function updatePos($nr, $pos) {
 
 	// $sql="SELECT * FROM user WHERE id = '".$q."'";
 	$sql = "UPDATE players SET cur_x= '".$cur_x."', cur_y= '".$cur_y."' WHERE nr='".$nr."'";
-	mysqli_query($link,$sql);
+	mysqli_query($link, $sql);
 	mysqli_close($link);
 
 
@@ -158,10 +158,10 @@ function resetPositions() {
         			$get_x_pos = get_DefCoord('x', $my_nr);
      			$get_y_pos = get_DefCoord('y', $my_nr);
 
-	      		$stmt->bindParam("cur_x", $get_x_pos);
-	     		$stmt->bindParam("cur_y", $get_y_pos);
-	     		$stmt->bindParam("display", $display);
-	     		$stmt->bindParam("nr", $my_nr);
+	      		$stmt->bindParam(":cur_x", $get_x_pos);
+	     		$stmt->bindParam(":cur_y", $get_y_pos);
+	     		$stmt->bindParam(":display", $display);
+	     		$stmt->bindParam(":nr", $my_nr);
 	     		$stmt->execute();
 	     	}
         $db = null;
@@ -173,65 +173,31 @@ function resetPositions() {
 }
 
 function get_coordPos($coord, $pos) {
-		if ($coord === 'x') {
-			$def_pos = 'def_x';
-		} else if ($coord === 'y') {
-			$def_pos = 'def_y';
-		}
+    echo 'pos = '. json_encode($pos);
+	if ($coord === 'x') {
+	   $def_pos = 'def_x';
+	} else if ($coord === 'y') {
+		$def_pos = 'def_y';
+	}
 
-     $sql = "SELECT ".$def_pos." FROM positions where pos=:pos";
+    $sql = "SELECT ".$def_pos." FROM positions where pos=:pos";
 
 	try {
-     	$db = getConnection();
-    		$stmt = $db->prepare($sql);
-     	$stmt->bindParam("pos", $pos);
-     	$stmt->execute();
-     	$pos = $stmt->fetchColumn(0);
-	     $db = null;
-	     echo $pos;
-     	return $pos;
-   	} catch(PDOException $e) {
+        $db = getConnection();
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam('pos', $pos);
+        echo 'statement = '. json_encode($stmt);
+        $stmt->execute();
+        $pos = $stmt->fetchColumn(0);
+        $db = null;
+         // echo $pos;
+        echo 'position = '. json_encode($pos);
+        return $pos;
+    } catch(PDOException $e) {
 	    //error_log($e->getMessage(), 3, '/var/tmp/php.log');
 		echo '{"error":{"text":'. $e->getMessage() .'}}';
 	}
 }
-// function get_coordPos($coord, $pos) {
-// 	require './config.php';
-// 		if ($coord === 'x') {
-// 			$def_pos = 'def_x';
-// 		} else if ($coord === 'y') {
-// 			$def_pos = 'def_y';
-// 		}
-
-//      $sql = "SELECT '".$def_pos."' FROM positions where pos='".$pos."' LIMIT 1";
-//      $get_pos = mysqli_query($link, $sql);
-
-//      $result = mysqli_fetch_field($get_pos);
-
-
-// 	mysqli_close($link);
-
-//  //     $result = mysqli_query($link,$sql);
-//  //     $x_y = mysqli_fetch_array($result)
-// 	// $close;
-// 	echo $result;
-//      return $result;
-
-
-// 	// try {
-//  //     	$db = getConnection();
-//  //    		$stmt = $db->prepare($sql);
-//  //     	$stmt->bindParam("pos", $pos);
-//  //     	$stmt->execute();
-//  //     	$pos = $stmt->fetchColumn(0);
-// 	//      $db = null;
-// 	//      // echo $pos;
-//  //     	return $pos;
-//  //   	} catch(PDOException $e) {
-// 	//     //error_log($e->getMessage(), 3, '/var/tmp/php.log');
-// 	// 	echo '{"error":{"text":'. $e->getMessage() .'}}';
-// 	// }
-// }
 
 function get_DefCoord($coord, $nr) {
 	$request = Slim::getInstance()->request();
@@ -249,7 +215,7 @@ function get_DefCoord($coord, $nr) {
 	try {
      	$db = getConnection();
     	$stmt = $db->prepare($sql);
-     	$stmt->bindParam("nr", $nr);
+     	$stmt->bindParam(":nr", $nr);
      	$stmt->execute();
      	$pos = $stmt->fetchColumn(0);
 	     $db = null;
@@ -266,7 +232,7 @@ function get_display($nr) {
 	try {
      	$db = getConnection();
     		$stmt = $db->prepare($sql);
-     	$stmt->bindParam("nr", $nr);
+     	$stmt->bindParam(":nr", $nr);
      	$stmt->execute();
      	$pos = $stmt->fetchColumn(0);
 	     $db = null;
