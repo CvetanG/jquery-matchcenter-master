@@ -1,19 +1,10 @@
 <?php
+
 require './config.php';
 require './index.php';
-// include_once('./index.php');
 
-// $model = new Something_Model();
-
-// $nr = intval($_GET['nr']);
 $nr = ($_GET['nr']);
 $pos = ($_GET['pos']);
-
-// $model->updatePos($nr, $pos);
-
-function console_log($data){
-  echo 'console.log('. json_encode( $data ) .')';
-}
 
 $cur_x = get_coordPos('x', $pos);
 // console_log($cur_x);

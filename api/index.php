@@ -1,144 +1,5 @@
 <?php
 
-// change def position to the constant player
-function updatePos($nr, $pos) {
-    require './config.php';
-    require './index.php';
-
-    $nr = ($_GET['nr']);
-    $pos = ($_GET['pos']);
-
-    $cur_x = get_coordPos('x', $pos);
-    $cur_y = get_coordPos('y', $pos);
-
-    $sql = "UPDATE players SET cur_x= '".$cur_x."', cur_y= '".$cur_y."' WHERE nr='".$nr."'";
-    mysqli_query($link, $sql);
-    mysqli_close($link);
-}
-
-
-// update player block to be none
-function updatePlayerBlock($nr) {
-    $request = Slim::getInstance()->request();
-    $body = $request->getBody();
-    $player = json_decode($body);
-    $sql = "UPDATE players SET display=:display WHERE nr=:nr";
-    try {
-        $db = getConnection();
-        $stmt = $db->prepare($sql);
-	   $get_cur_display = get_display($nr);
-
-	   if ($get_cur_display === 'none') {
-	   	$display = 'block';
-	   } else if($get_cur_display === 'block'){
-	   	$display = 'none';
-	   }
-        $stmt->bindParam("display", $display);
-        $stmt->bindParam("nr", $nr);
-	   $stmt->execute();
-        $db = null;
-        echo json_encode($player);
-        } catch(PDOException $e) {
-	    //error_log($e->getMessage(), 3, '/var/tmp/php.log');
-		echo '{"error":{"text":'. $e->getMessage() .'}}';
-	}
-}
-
-// update player pos to default
-function updateOnePosDefault($nr) {
-    $request = Slim::getInstance()->request();
-    $body = $request->getBody();
-    $player = json_decode($body);
-
-    $sql = "UPDATE players SET cur_x=:cur_x, cur_y=:cur_y WHERE nr=:nr";
-
-    	try {
-      	$db = getConnection();;
-      	$stmt = $db->prepare($sql);
-
-		$get_x_pos = get_DefCoord('x', $nr);
-     	$get_y_pos = get_DefCoord('y', $nr);
-
-      	$stmt->bindParam("cur_x", $get_x_pos);
-     	$stmt->bindParam("cur_y", $get_y_pos);
-      	$stmt->bindParam("nr", $nr);
-		$stmt->execute();
-     	$db = null;
-     	echo json_encode($player);
-        } catch(PDOException $e) {
-	    //error_log($e->getMessage(), 3, '/var/tmp/php.log');
-		echo '{"error":{"text":'. $e->getMessage() .'}}';
-	}
-}
-
-
-// set all position to default
-function setAllPosDefault() {
-    // $request = Slim::getInstance()->request();
-    // $body = $request->getBody();
-    // $player = json_decode($body);
-    // $sql = "UPDATE players SET cur_x=:cur_x, cur_y=:cur_y WHERE nr=:nr";
-
-    // try {
-    //     	$db = getConnection();
-    //     	$stmt = $db->prepare($sql);
-
-        	$players = get_players();
-        	for ($x = 0; $x < count($players); $x++) {
-     		$my_nr = $players[$x][0];
-     		// echo $my_nr;
-     		updateOnePosDefault($my_nr);
-       //  		$get_x_pos = get_DefCoord('x', $my_nr);
-     		// $get_y_pos = get_DefCoord('y', $my_nr);
-	      // 	$stmt->bindParam("cur_x", $get_x_pos);
-	     	// $stmt->bindParam("cur_y", $get_y_pos);
-	     	// $stmt->bindParam("nr", $my_nr);
-	     	// $stmt->execute();
-	     	}
-  //       	$db = null;
-  //       	echo json_encode($player);
-  //       } catch(PDOException $e) {
-	 //    //error_log($e->getMessage(), 3, '/var/tmp/php.log');
-		// echo '{"error":{"text":'. $e->getMessage() .'}}';
-		// }
-}
-
-// set all position to default and all players block to none
-function resetPositions() {
-
-	$request = Slim::getInstance()->request();
-    $body = $request->getBody();
-    $player = json_decode($body);
-
-    $sql = "UPDATE players SET cur_x=:cur_x, cur_y=:cur_y, display=:display WHERE nr=:nr";
-    try {
-        $db = getConnection();;
-        $stmt = $db->prepare($sql);
-        $display = 'none';
-
-        $players = get_players();
-        		// foreach ($players as &$value) {
-        	for ($x = 0; $x < count($players); $x++) {
-        			// updateOnePosDefault(intval($players[$x]));
-     			$my_nr = $players[$x][0];
-     			echo $my_nr;
-        			$get_x_pos = get_DefCoord('x', $my_nr);
-     			$get_y_pos = get_DefCoord('y', $my_nr);
-
-	      		$stmt->bindParam(":cur_x", $get_x_pos);
-	     		$stmt->bindParam(":cur_y", $get_y_pos);
-	     		$stmt->bindParam(":display", $display);
-	     		$stmt->bindParam(":nr", $my_nr);
-	     		$stmt->execute();
-	     	}
-        $db = null;
-        echo json_encode($players);
-        } catch(PDOException $e) {
-	    //error_log($e->getMessage(), 3, '/var/tmp/php.log');
-		echo '{"error":{"text":'. $e->getMessage() .'}}';
-	}
-}
-
 function get_coordPos($coord, $pos) {
     echo 'pos = '. json_encode($pos);
 	if ($coord === 'x') {
@@ -167,15 +28,12 @@ function get_coordPos($coord, $pos) {
 }
 
 function get_DefCoord($coord, $nr) {
-	$request = Slim::getInstance()->request();
-	$body = $request->getBody();
-	$player = json_decode($body);
 
-		if ($coord === 'x') {
-			$def_pos = 'def_x';
-		} else if ($coord === 'y') {
-			$def_pos = 'def_y';
-		}
+    if ($coord === 'x') {
+    	$def_pos = 'def_x';
+    } else if ($coord === 'y') {
+    	$def_pos = 'def_y';
+    }
 
      $sql = "SELECT ".$def_pos." FROM players where nr=:nr";
 
@@ -185,7 +43,7 @@ function get_DefCoord($coord, $nr) {
      	$stmt->bindParam(":nr", $nr);
      	$stmt->execute();
      	$pos = $stmt->fetchColumn(0);
-	     $db = null;
+        $db = null;
 	     // echo $pos;
      	return $pos;
    	} catch(PDOException $e) {
@@ -198,11 +56,11 @@ function get_display($nr) {
 	$sql = "SELECT display FROM players where nr=:nr";
 	try {
      	$db = getConnection();
-    		$stmt = $db->prepare($sql);
+    	$stmt = $db->prepare($sql);
      	$stmt->bindParam(":nr", $nr);
      	$stmt->execute();
-     	$pos = $stmt->fetchColumn(0);
-	     $db = null;
+        $pos = $stmt->fetchColumn(0);
+        $db = null;
      	return $pos;
    } catch(PDOException $e) {
 	    //error_log($e->getMessage(), 3, '/var/tmp/php.log');
@@ -210,18 +68,15 @@ function get_display($nr) {
 	}
 }
 
-function get_players() {
-	$request = Slim::getInstance()->request();
-	$body = $request->getBody();
-	$player = json_decode($body);
+function get_playersNr() {
 
-     $sql = "SELECT nr FROM players";
+    $sql = "SELECT nr FROM players";
 
 	try {
      	$db = getConnection();
-    		$stmt = $db->prepare($sql);     	$stmt->execute();
+        $stmt = $db->prepare($sql);     	$stmt->execute();
      	$players = $stmt->fetchAll(PDO::FETCH_NUM);
-	     $db = null;
+        $db = null;
 	     // print_r($players);
 	     // print("\n");
      	return $players;
