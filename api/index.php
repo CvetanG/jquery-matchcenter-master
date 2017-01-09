@@ -2,51 +2,18 @@
 
 // change def position to the constant player
 function updatePos($nr, $pos) {
+    require './config.php';
+    require './index.php';
 
-	// $nr = intval($_GET['nr']);
-	// $pos = intval($_GET['pos']);
+    $nr = ($_GET['nr']);
+    $pos = ($_GET['pos']);
 
-	include ('./config.php');
+    $cur_x = get_coordPos('x', $pos);
+    $cur_y = get_coordPos('y', $pos);
 
-// $con = mysqli_connect('localhost','peter','abc123','my_db');
-// if (!$con) {
-//     die('Could not connect: ' . mysqli_error($con));
-// }
-
-
-// mysqli_select_db($con,"ajax_demo");
-	$cur_x = get_coordPos('x', $pos);
-     $cur_y = get_coordPos('y', $pos);
-
-	// $sql="SELECT * FROM user WHERE id = '".$q."'";
-	$sql = "UPDATE players SET cur_x= '".$cur_x."', cur_y= '".$cur_y."' WHERE nr='".$nr."'";
-	mysqli_query($link, $sql);
-	mysqli_close($link);
-
-
-
-
-	// $request = Slim::getInstance()->request();
-	// $body = $request->getBody();
-	// $player = json_decode($body);
-	// $sql = "UPDATE players SET cur_x=:cur_x, cur_y=:cur_y WHERE nr=:nr";
-	// try {
- //     	$db = getConnection();
- //    		$stmt = $db->prepare($sql);
-
- //     	$get_x_pos = get_coordPos('x', $pos);
- //        	$get_y_pos = get_coordPos('y', $pos);
-
- //     	$stmt->bindParam("cur_x", $get_x_pos);
- //     	$stmt->bindParam("cur_y", $get_y_pos);
- //     	$stmt->bindParam("nr", $nr);
- //     	$stmt->execute();
- //     	$db = null;
- //      	echo json_encode($player);
- //   } catch(PDOException $e) {
-	//     //error_log($e->getMessage(), 3, '/var/tmp/php.log');
-	// 	echo '{"error":{"text":'. $e->getMessage() .'}}';
-	// }
+    $sql = "UPDATE players SET cur_x= '".$cur_x."', cur_y= '".$cur_y."' WHERE nr='".$nr."'";
+    mysqli_query($link, $sql);
+    mysqli_close($link);
 }
 
 
@@ -270,5 +237,11 @@ function getConnection() {
 	$dbConnection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
  	return $dbConnection;
 }
+
+function console_log($data){
+      // echo '<script>';
+      echo 'console.log('. json_encode( $data ) .')';
+      // echo '</script>';
+    }
 
 ?>

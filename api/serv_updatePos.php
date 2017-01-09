@@ -12,9 +12,7 @@ $pos = ($_GET['pos']);
 // $model->updatePos($nr, $pos);
 
 function console_log($data){
-  // echo '<script>';
   echo 'console.log('. json_encode( $data ) .')';
-  // echo '</script>';
 }
 
 $cur_x = get_coordPos('x', $pos);

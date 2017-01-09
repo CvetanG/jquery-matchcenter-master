@@ -18,7 +18,6 @@
  * Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
  */
 $.getScript("./js/ajaxGetPost.js");
-// $.getScript("./js/jquery.min.js");
 
 (function($) {
 
@@ -60,7 +59,7 @@ $.getScript("./js/ajaxGetPost.js");
     systems['4-4-2']['x'] = [149, 15, 93, 205, 283, 15, 93, 205, 283, 93, 205];
     systems['4-4-2']['y'] = [40, 145, 110, 110, 145, 235, 200, 200, 235, 290, 290];
 
-//  Playing system: Reset
+    //  Playing system: Reset
     systems['Reset'] = new Array();
     systems['Reset']['nr'] = [22, 9, 11, 3, 5, 7, 16, 8, 6, 69, 23, 2, 1, 14, 15];
     systems['Reset']['x'] = [15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 0, 0, 0, 0, 0, 330, 230, 430, 330, 230, 430];

@@ -10,8 +10,9 @@ $(document).ready(function(){
     });
 
 function updatePos(nr, pos) {
-    
-    xmlhttp.open("GET","api/serv_updatePos.php?nr="+nr+"&pos="+pos, true);
+    var my_method =updatePos;
+    // xmlhttp.open("GET","api/serv_updatePos.php?nr="+nr+"&pos="+pos, true);
+    xmlhttp.open("POST", "api/index.php?method="+my_method+"&nr="+nr+"&pos="+pos, true);
     xmlhttp.send();
 
     if (xmlhttp.status === 200) {
