@@ -40,7 +40,7 @@
             $match_time = $row['match_time'];
 
             $match = '<td> <img src="'.$home.'" width="270px"></td>';
-            $match .= '<td> <h3>'.$match_day.' </h3> <h3>'.$match_time.' </h3></td>';
+            $match .= '<td> <h3>'.$match_day.' <br>'.$match_time.'h </h3> <p id="count"></p></td>';
             $match .= '<td> <img src="'.$away.'" max height="90px"></td>';
 
             echo "$match";
@@ -73,12 +73,6 @@
         </div>
         <div id="middle">
             <h2>Who will play next match and Substitution</h2>
-                <?php
-                    include ('./api/index.php');
-                    // $count;
-                    my_count();
-                ?>
-                <h2 style="bottom: 25; position: absolute;">Total Players: <?php echo "$count" ?></h2> 
                 <p id="bottom_possition">
                 <input type="button" onclick="$('#matchfield').matchcenter('myReset');" value="Reset All Players" />
             </p>
@@ -117,7 +111,7 @@
             $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, '.$nr.', 24, &#39LW&#39, 204 );">LW</a>';
             $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, '.$nr.', 25, &#39RW&#39, 205 );">RW</a>';
             $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39myDefaultPos&#39, '.$nr.', '.$id.');">default</a>';
-            $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39injured&#39, '.$nr.');">injured</a>';
+            $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39injured&#39, '.$nr.', '.$id.');">injured</a>';
                      // $player .='<a href="#" onclick="$(&#39#player-'.$nr.'&#39).remove();">Remove</a>';
             $player .='</div>';
             $player .='</div>';
@@ -132,8 +126,10 @@
           <p >
                <input type="button" onclick="$('#matchfield').matchcenter('AllDefaultPos');" value="Reset All Positions" />
           </p>
+
         </div>
         <footer>
+
             <!-- <h4>Footer</h4>
             <p>
                 Footer text
@@ -146,9 +142,16 @@
             system: 'Reset'
         });
 
-        function myFunction() {
-            setInterval(function(){ alert("Hello"); }, 3000);
+        function loadlink(){
+            $('#count').load('./api/test.php',function () {
+                 <!-- $(this).unwrap(); -->
+            });
         }
+
+        loadlink(); // This will run on page load
+        setInterval(function(){
+            loadlink() // this will run after every 5 seconds
+        }, 5000);
 
     </script>
 </body>

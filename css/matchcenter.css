@@ -102,7 +102,7 @@ body {
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fd7575', endColorstr='#eb0000');
     -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#fd7575', endColorstr='#eb0000')";
     background: linear-gradient(top, #fd7575, #eb0000);
-} 
+}
 
 /* STRUCTURE */
 
@@ -157,6 +157,8 @@ footer {
     height: 100px;
     clear: both;
     padding: 0 15px;
+    color: #fff;
+    text-align: center;
 }
 
 /************************************************************************************
@@ -258,15 +260,15 @@ MEDIA QUERIES
 }
 
 .imgB1 {
-    overflow: hidden;
+    /*overflow: hidden;*/
     max-width: 20%;
     position: relative;
-    top: -55px;
-    left: 100px;
+    top: 0px;
+    left: 0px;
     z-index: 3;
     margin:0;
     padding:0;
-    margin-left: -60px;
+    margin-left: -58px;
 }
 
 #content #imgA1:hover {

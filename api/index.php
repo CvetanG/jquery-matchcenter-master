@@ -115,13 +115,4 @@ function console_log($data){
       // echo '</script>';
     }
 
-function my_count() {
-    global $count;
-    include ('./api/config.php');
-    $sql = "SELECT COUNT(display) FROM players WHERE display='block';";
-    $rs = mysqli_query($link, $sql);
-    $count = mysqli_fetch_array($rs)[0];
-    // return $count;
-}
-
 ?>

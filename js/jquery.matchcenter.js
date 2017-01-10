@@ -196,12 +196,27 @@ $.getScript("./js/ajaxGetPost.js");
          *
          * @param int id ID of the player (application specific)
          */
-        injured : function(nr) {
+        injured : function(nr, id) {
             return this.each(function(){
                 var $this = $(this),
                 data = $this.data('matchcenter');
+                var inj = $('#inj-' + nr).css('display');
                 $("#inj-" + nr).toggle();
-                $("#player-" + nr).toggle();
+
+                if (inj === "none") {
+                    $("#player-" + nr).toggle();
+
+                    var pos = parseInt($('#player-' + nr).css('left'));
+                    if (pos > 662) {
+                        var xpos = systems[data.system]['x'][id-1] + elementLeft;
+                        var ypos = systems[data.system]['y'][id-1] + elementTop;
+                        $('#player-' + nr).removeAttr('style');
+                        $('#player-' + nr).attr({
+                                style: "left: "+ xpos + "; top: " + ypos + ";"
+                        });
+                        updateOnePosDefault(nr);
+                    }
+                }
                 updateInjured(nr);
             });
         },
