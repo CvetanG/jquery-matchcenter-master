@@ -80,7 +80,7 @@ CREATE TABLE `players` (
 
 /*Data for the table `players` */
 
-insert  into `players`(`pos`,`nr`,`name`,`link`,`def_x`,`def_y`,`cur_x`,`cur_y`,`display`) values
+INSERT  INTO `players`(`pos`,`nr`,`name`,`link`,`def_x`,`def_y`,`cur_x`,`cur_y`,`display`,`injured`) VALUES
 
 (1,22,'Miro','http://www.bamf-bg.eu/uploads/players/t_1477403936__mg_8858.jpg',15.00,40.00,15.00,40.00,'none','none'),
 (2,9,'Boby','http://www.bamf-bg.eu/uploads/players/t_1477403992__mg_8871.jpg',15.00,70.00,15.00,70.00,'none','none'),
