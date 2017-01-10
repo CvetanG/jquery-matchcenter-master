@@ -63,7 +63,7 @@ insert  into `match_day`(`match_id`,`logo_home_id`,`logo_away_id`,`match_day`,`m
 DROP TABLE IF EXISTS `players`;
 
 CREATE TABLE `players` (
-  `pos` int(2) NOT NULL,
+  `pos` int(2) NOT NULL AUTO_INCREMENT,
   `nr` int(3) NOT NULL,
   `name` varchar(10) CHARACTER SET utf8 NOT NULL,
   `link` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
@@ -72,27 +72,30 @@ CREATE TABLE `players` (
   `cur_x` decimal(6,2) NOT NULL,
   `cur_y` decimal(6,2) NOT NULL,
   `display` enum('block','none') CHARACTER SET utf8 NOT NULL,
-  PRIMARY KEY (`pos`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `injured` enum('block','none') COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`pos`),
+  UNIQUE KEY `nr_UNIQUE` (`nr`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
 
 /*Data for the table `players` */
 
 insert  into `players`(`pos`,`nr`,`name`,`link`,`def_x`,`def_y`,`cur_x`,`cur_y`,`display`) values
 
-(1,22,'Miro','http://www.bamf-bg.eu/uploads/players/t_1477403936__mg_8858.jpg',15.00,40.00,15.00,40.00,'none'),
-(2,9,'Boby','http://www.bamf-bg.eu/uploads/players/t_1477403992__mg_8871.jpg',15.00,70.00,15.00,70.00,'none'),
-(3,11,'Denis','http://www.bamf-bg.eu/uploads/players/t_1477404015__mg_8859.jpg',15.00,100.00,15.00,100.00,'none'),
-(4,3,'Biser','http://www.bamf-bg.eu/uploads/players/t_1477404041__mg_8852.jpg',15.00,130.00,15.00,130.00,'block'),
-(5,5,'Bobo','./img/bobo.jpg',15.00,160.00,15.00,160.00,'block'),
-(6,7,'Sasho','http://www.bamf-bg.eu/uploads/players/t_1477404116__mg_8864.jpg',15.00,190.00,15.00,190.00,'block'),
-(7,16,'Angel','http://www.bamf-bg.eu/uploads/players/t_1477404147__mg_8855.jpg',15.00,220.00,15.00,220.00,'none'),
-(8,8,'Ceco','http://www.bamf-bg.eu/uploads/players/t_1477404272__mg_8880.jpg',15.00,250.00,15.00,250.00,'none'),
-(9,6,'Boyan T','http://www.bamf-bg.eu/uploads/players/t_1477404163__mg_8876.jpg',15.00,280.00,15.00,280.00,'none'),
-(10,69,'Dinko','http://www.bamf-bg.eu/uploads/players/t_1477404358__mg_8877.jpg',15.00,310.00,15.00,310.00,'none'),
-(11,23,'Veni','http://www.bamf-bg.eu/uploads/players/t_1477404194__mg_8874.jpg',15.00,340.00,15.00,340.00,'none'),
-(12,2,'Magynski','http://www.bamf-bg.eu/uploads/players/t_1477404217__mg_8869.jpg',15.00,370.00,15.00,370.00,'none'),
-(13,1,'Iliq','http://www.bamf-bg.eu/uploads/players/t_1477404231__mg_8882.jpg',15.00,400.00,15.00,400.00,'none'),
-(14,14,'Stoyan','http://www.bamf-bg.eu/uploads/players/t_1477404250__mg_8865.jpg',15.00,430.00,15.00,430.00,'none');
+(1,22,'Miro','http://www.bamf-bg.eu/uploads/players/t_1477403936__mg_8858.jpg',15.00,40.00,15.00,40.00,'none','none'),
+(2,9,'Boby','http://www.bamf-bg.eu/uploads/players/t_1477403992__mg_8871.jpg',15.00,70.00,15.00,70.00,'none','none'),
+(3,11,'Denis','http://www.bamf-bg.eu/uploads/players/t_1477404015__mg_8859.jpg',15.00,100.00,15.00,100.00,'none','none'),
+(4,3,'Biser','http://www.bamf-bg.eu/uploads/players/t_1477404041__mg_8852.jpg',15.00,130.00,15.00,130.00,'none','none'),
+(5,5,'Bobo','./img/bobo.jpg',15.00,160.00,15.00,160.00,'none','none'),
+(6,7,'Sasho','http://www.bamf-bg.eu/uploads/players/t_1477404116__mg_8864.jpg',15.00,190.00,15.00,190.00,'none','block'),
+(7,16,'Angel','http://www.bamf-bg.eu/uploads/players/t_1477404147__mg_8855.jpg',15.00,220.00,15.00,220.00,'none','block'),
+(8,8,'Ceco','http://www.bamf-bg.eu/uploads/players/t_1477404272__mg_8880.jpg',15.00,250.00,15.00,250.00,'block','none'),
+(9,6,'Boyan T','http://www.bamf-bg.eu/uploads/players/t_1477404163__mg_8876.jpg',15.00,280.00,15.00,280.00,'none','block'),
+(10,69,'Dinko','http://www.bamf-bg.eu/uploads/players/t_1477404358__mg_8877.jpg',15.00,310.00,15.00,310.00,'none','block'),
+(11,23,'Veni','http://www.bamf-bg.eu/uploads/players/t_1477404194__mg_8874.jpg',15.00,340.00,15.00,340.00,'none','block'),
+(12,2,'Magunski','http://www.bamf-bg.eu/uploads/players/t_1477404217__mg_8869.jpg',15.00,370.00,15.00,370.00,'none','block'),
+(13,1,'Iliq','http://www.bamf-bg.eu/uploads/players/t_1477404231__mg_8882.jpg',15.00,400.00,15.00,400.00,'block','block'),
+(14,14,'Stoyan','http://www.bamf-bg.eu/uploads/players/t_1477404250__mg_8865.jpg',15.00,430.00,15.00,430.00,'none','block');
 
 /*Table structure for table `positions` */
 
