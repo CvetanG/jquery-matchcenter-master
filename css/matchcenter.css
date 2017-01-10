@@ -246,7 +246,7 @@ MEDIA QUERIES
 }
 
 #content #imgA1 {
-    /*overflow: hidden;*/
+    overflow: hidden;
     position: relative;
     display: inline-block;
     max-width: 24%;
@@ -257,30 +257,24 @@ MEDIA QUERIES
     z-index: 1;
 }
 
-#imgB1 {
+.imgB1 {
+    overflow: hidden;
     max-width: 20%;
-    position:relative;
-    top: 5px;
-    left: -45px;
+    position: relative;
+    top: -55px;
+    left: 100px;
     z-index: 3;
-    /*border: none;*/
-    /*display: none;*/
-    display: inline;
-    /*overflow: hidden;*/
     margin:0;
     padding:0;
-} 
+    margin-left: -60px;
+}
 
 #content #imgA1:hover {
     transform: scale(1.15);
     cursor: pointer;
 }
 
-/*img:nth-of-type(2n) {
-   margin: 10px 0px;
-}*/
-
-#content.a.img:nth-of-type(3n) {
+#content #imgA1:nth-of-type(3n) {
   clear: left;
 }
 

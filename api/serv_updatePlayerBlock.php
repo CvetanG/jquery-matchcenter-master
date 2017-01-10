@@ -9,7 +9,7 @@ $get_cur_display = get_display($nr);
 
 if ($get_cur_display === 'none') {
 	$display = 'block';
-} else if($get_cur_display === 'block'){
+} else if ($get_cur_display === 'block'){
  	$display = 'none';
 }
 console_log($display);

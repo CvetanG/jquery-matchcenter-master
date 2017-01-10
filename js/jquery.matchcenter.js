@@ -196,13 +196,23 @@ $.getScript("./js/ajaxGetPost.js");
          *
          * @param int id ID of the player (application specific)
          */
-        addRedCard : function(id) {
+        injured : function(nr) {
             return this.each(function(){
-                var redcard = '<div id="player-redcard-' + id + '" class="player-redcard"></div>';
-                $('#player-' + id).append(redcard);
-                $('#player-redcard-' + id).fadeIn();
+                var $this = $(this),
+                data = $this.data('matchcenter');
+                $("#inj-" + nr).toggle();
+                $("#player-" + nr).toggle();
+                updateInjured(nr);
             });
         },
+
+        // addRedCard : function(id) {
+        //     return this.each(function(){
+        //         var redcard = '<div id="player-redcard-' + id + '" class="player-redcard"></div>';
+        //         $('#player-' + id).append(redcard);
+        //         $('#player-redcard-' + id).fadeIn();
+        //     });
+        // },
 
         /**
          * Highlight a player.
@@ -352,7 +362,7 @@ $.getScript("./js/ajaxGetPost.js");
             })
         },
 
-        onoffPlayer : function(id, nr, name) {
+        onoffPlayer : function(id, nr) {
             return this.each(function(){
                 var $this = $(this),
                 data = $this.data('matchcenter');

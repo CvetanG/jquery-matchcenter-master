@@ -30,6 +30,16 @@ function updatePlayerBlock(nr) {
     }
 }
 
+function updateInjured(nr) {
+
+    xmlhttp.open("POST","api/serv_injured.php?nr="+nr, true);
+    xmlhttp.send();
+
+    if (xmlhttp.status === 200) {
+      alert(xmlhttp.responseText);
+    }
+}
+
 // $app->put('player/default/:nr', 'updateOnePosDefault');
 function updateOnePosDefault(nr) {
     

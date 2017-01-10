@@ -63,8 +63,9 @@
             $nr = $row['nr'];
             $name = $row['name'];
             $link = $row['link'];
-            $player = '<img id="imgA1" class="img-'.$nr.'" src="'.$link.'" onclick="$(&#39#matchfield&#39).matchcenter(&#39onoffPlayer&#39, '.$id.', '.$nr.', &#39'.$name.'&#39);">';
-            $player .= '<img id="imgB1" src="img/redcross.png">';
+            $injured = $row['injured'];
+            $player = '<img id="imgA1" class="img-'.$nr.'" src="'.$link.'" onclick="$(&#39#matchfield&#39).matchcenter(&#39onoffPlayer&#39, '.$id.', '.$nr.');">';
+            $player .= '<img id="inj-'.$nr.'" class="imgB1" src="img/redcross.png" style="display:'.$injured.'">';
             echo "$player";
         }
 ?>
@@ -72,22 +73,28 @@
         </div>
         <div id="middle">
             <h2>Who will play next match and Substitution</h2>
-            <p id="bottom_possition">
+                <?php
+                    include ('./api/index.php');
+                    // $count;
+                    my_count();
+                ?>
+                <h2 style="bottom: 25; position: absolute;">Total Players: <?php echo "$count" ?></h2> 
+                <p id="bottom_possition">
                 <input type="button" onclick="$('#matchfield').matchcenter('myReset');" value="Reset All Players" />
             </p>
         </div>
         <div id="matchfield">
             <!-- inserting drop down menu -->
-            <?php
+<?php
             // $a = 5;
             // echo "$a";
-     include ('./api/config.php');
+        include ('./api/config.php');
         //Create a query to fetch our values from the database
         $get_player = mysqli_query($link, "SELECT * FROM players");
         //We then set variables from the * array that is fetched from the database
         while($row = mysqli_fetch_array($get_player)) {
 
-            $id= $row['pos'];
+            $id = $row['pos'];
             $nr = $row['nr'];
             $name = $row['name'];
 
@@ -99,22 +106,22 @@
             $y = (float)$row['cur_y'] + $elementTop;
             $d = $row['display'];
             //then echo our div element with CSS properties to set the left(x) and top(y) values of the element
-             $player = '<div id="player-'.$nr.'" class="player cf" style="left: '.$x. 'px; top: '.$y.'px; display:'.$d.'">';
-                    $player .= '<div class="player-nr">'.$nr.'</div>';
-                    $player .= '<div class="player-name">'.$name;
-                    $player .= '<div class="dropdown-content">';
-                    $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, '.$nr.', 20, &#39GK&#39, 200 );">GK</a>';
-                    $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, '.$nr.', 21, &#39LB&#39, 201 );">LB</a>';
-                    $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, '.$nr.', 22, &#39RB&#39, 202 );">RB</a>';
-                    $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, '.$nr.', 23, &#39CM&#39, 203 );">CM</a>';
-                    $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, '.$nr.', 24, &#39LW&#39, 204 );">LW</a>';
-                    $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, '.$nr.', 25, &#39RW&#39, 205 );">RW</a>';
-                    $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39myDefaultPos&#39, '.$nr.', '.$id.');">default</a>';
-                    $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39addRedCard&#39, '.$nr.');">redcard</a>';
+            $player = '<div id="player-'.$nr.'" class="player cf" style="left: '.$x. 'px; top: '.$y.'px; display:'.$d.'">';
+            $player .= '<div class="player-nr">'.$nr.'</div>';
+            $player .= '<div class="player-name">'.$name;
+            $player .= '<div class="dropdown-content">';
+            $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, '.$nr.', 20, &#39GK&#39, 200 );">GK</a>';
+            $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, '.$nr.', 21, &#39LB&#39, 201 );">LB</a>';
+            $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, '.$nr.', 22, &#39RB&#39, 202 );">RB</a>';
+            $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, '.$nr.', 23, &#39CM&#39, 203 );">CM</a>';
+            $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, '.$nr.', 24, &#39LW&#39, 204 );">LW</a>';
+            $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39mySubstitutePlayer&#39, '.$nr.', 25, &#39RW&#39, 205 );">RW</a>';
+            $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39myDefaultPos&#39, '.$nr.', '.$id.');">default</a>';
+            $player .='<a href="#" onclick="$(&#39#matchfield&#39).matchcenter(&#39injured&#39, '.$nr.');">injured</a>';
                      // $player .='<a href="#" onclick="$(&#39#player-'.$nr.'&#39).remove();">Remove</a>';
-                     $player .='</div>';
-                    $player .='</div>';
-                    $player .='</div>';
+            $player .='</div>';
+            $player .='</div>';
+            $player .='</div>';
             echo "$player";
 
         }
@@ -125,7 +132,7 @@
           <p >
                <input type="button" onclick="$('#matchfield').matchcenter('AllDefaultPos');" value="Reset All Positions" />
           </p>
-     </div>
+        </div>
         <footer>
             <!-- <h4>Footer</h4>
             <p>
@@ -138,6 +145,10 @@
         var matchcenter = $('#matchfield').matchcenter({
             system: 'Reset'
         });
+
+        function myFunction() {
+            setInterval(function(){ alert("Hello"); }, 3000);
+        }
 
     </script>
 </body>

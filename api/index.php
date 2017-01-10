@@ -53,15 +53,31 @@ function get_DefCoord($coord, $nr) {
 }
 
 function get_display($nr) {
-	$sql = "SELECT display FROM players where nr=:nr";
+    $sql = "SELECT display FROM players where nr=:nr";
+    try {
+        $db = getConnection();
+        $stmt = $db->prepare($sql);
+        $stmt->bindParam(":nr", $nr);
+        $stmt->execute();
+        $pos = $stmt->fetchColumn(0);
+        $db = null;
+        return $pos;
+   } catch(PDOException $e) {
+        //error_log($e->getMessage(), 3, '/var/tmp/php.log');
+        echo '{"error":{"text":'. $e->getMessage() .'}}';
+    }
+}
+
+function get_injured($nr) {
+	$sql = "SELECT injured FROM players where nr=:nr";
 	try {
      	$db = getConnection();
     	$stmt = $db->prepare($sql);
      	$stmt->bindParam(":nr", $nr);
      	$stmt->execute();
-        $pos = $stmt->fetchColumn(0);
+        $inj = $stmt->fetchColumn(0);
         $db = null;
-     	return $pos;
+     	return $inj;
    } catch(PDOException $e) {
 	    //error_log($e->getMessage(), 3, '/var/tmp/php.log');
 		echo '{"error":{"text":'. $e->getMessage() .'}}';
@@ -98,5 +114,14 @@ function console_log($data){
       echo 'console.log('. json_encode( $data ) .')';
       // echo '</script>';
     }
+
+function my_count() {
+    global $count;
+    include ('./api/config.php');
+    $sql = "SELECT COUNT(display) FROM players WHERE display='block';";
+    $rs = mysqli_query($link, $sql);
+    $count = mysqli_fetch_array($rs)[0];
+    // return $count;
+}
 
 ?>
