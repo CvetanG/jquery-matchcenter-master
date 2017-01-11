@@ -124,6 +124,12 @@ header td {
     text-align: center;
 }
 
+header td img {
+    max-width:270px; 
+    max-height:90px;
+    margin:auto;
+}
+
 #content {
     color: #fff;
     width: 290px;

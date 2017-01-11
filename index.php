@@ -39,9 +39,9 @@
             $match_day = $row['match_day'];
             $match_time = $row['match_time'];
 
-            $match = '<td> <img src="'.$home.'" width="270px"></td>';
-            $match .= '<td> <h3>'.$match_day.' <br>'.$match_time.'h </h3> <p id="count"></p></td>';
-            $match .= '<td> <img src="'.$away.'" max height="90px"></td>';
+            $match = '<td> <img src="'.$home.'" ></td>';
+            $match .= '<td> <h4>'.$match_day.' <br>'.$match_time.'h </h4> <p id="count"></p></td>';
+            $match .= '<td> <img src="'.$away.'" ></td>';
 
             echo "$match";
         }
@@ -72,7 +72,7 @@
             <p>* click on your picture to Add or Remove yourself from the list with players for the next match</p>
         </div>
         <div id="middle">
-            <h2>Who will play next match and Substitution</h2>
+            <h3>Who will play next match and Substitution</h3>
                 <p id="bottom_possition">
                 <input type="button" onclick="$('#matchfield').matchcenter('myReset');" value="Reset All Players" />
             </p>
