@@ -95,7 +95,11 @@ INSERT  INTO `players`(`pos`,`nr`,`name`,`link`,`def_x`,`def_y`,`cur_x`,`cur_y`,
 (11,23,'Veni','http://www.bamf-bg.eu/uploads/players/t_1477404194__mg_8874.jpg',15.00,340.00,15.00,340.00,'none','none'),
 (12,2,'Magunski','http://www.bamf-bg.eu/uploads/players/t_1477404217__mg_8869.jpg',15.00,370.00,15.00,370.00,'none','none'),
 (13,1,'Iliq','http://www.bamf-bg.eu/uploads/players/t_1477404231__mg_8882.jpg',15.00,400.00,15.00,400.00,'block','none'),
-(14,14,'Stoyan','http://www.bamf-bg.eu/uploads/players/t_1477404250__mg_8865.jpg',15.00,430.00,15.00,430.00,'none','none');
+(14,14,'Stoyan','http://www.bamf-bg.eu/uploads/players/t_1477404250__mg_8865.jpg',15.00,430.00,15.00,430.00,'none','none'),
+(15,10,'Blago','./img/bpopov.png',15.00,460.00,15.00,460.00,'none','none'),
+(16,30,'Veliko','./img/veliko.jpg',15.00,490.00,15.00,490.00,'none','none'),
+(17,31,'Extra','./img/no-image.png',15.00,520.00,15.00,520.00,'none','none'),
+(18,32,'Extra','./img/no-image.png',15.00,550.00,15.00,450.00,'none','none');
 
 /*Table structure for table `positions` */
 
